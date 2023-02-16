@@ -10,7 +10,7 @@ A site for buying and selling cards - based on the site https://www.cardmarket.c
 - User accounts - registration and login via email address or Google, with verification for accounts via email link.
 - Messaging system between users.
 - Card listings
-- Ability to 
+- Ability to filter card listings
 - Card purchases
 
 ## User Features
