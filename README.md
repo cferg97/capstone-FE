@@ -26,6 +26,7 @@ A site for buying and selling cards - based on the site https://www.cardmarket.c
     - Seller Location (country)
     - Card condition (Mint, near mint, lightly used etc.)
     - Foil or non-foil
+- Sellers can auto generate envelopes for printing.
 
 ## Seller Feedback
 - Users can leave feedback on sellers that they have purchased from.
