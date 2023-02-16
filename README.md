@@ -1,6 +1,8 @@
 
 # Capstone Front End
 
+Link to backend documentation: https://github.com/cferg97/capstone-BE/blob/main/README.md
+
 A site for buying and selling cards - based on the site https://www.cardmarket.com/en/Magic
 
 
