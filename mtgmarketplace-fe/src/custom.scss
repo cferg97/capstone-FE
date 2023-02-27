@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+$theme-colors: (
+  "primary": #00a3ff,
+  "outline": #dedede,
+  "near-mint": #86d960,
+  "excellent": #94bd90,
+  "good": #d9d267,
+  "lightly-played": #d98080,
+  "heavily-played": #b55252,
+);
+
+html {
+  height: 100vh;
+  width: 100vw;
+  font-family: "Ubuntu", sans-serif;
+}
+
+@import "~bootstrap/scss/bootstrap.scss";
