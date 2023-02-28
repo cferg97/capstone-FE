@@ -1,11 +1,18 @@
-import { Container, Button } from "react-bootstrap";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/pages/Home";
+import Navigation from "./components/Navigation";
+import Register from "./components/pages/Register";
 
 function App() {
   return (
     <>
-      <Container fluid className="m-0 p-0" style={{ width: "100%", height: "100%" }}>
-        
-      </Container>
+      <Router>
+        <Navigation />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Router>
     </>
   );
 }
