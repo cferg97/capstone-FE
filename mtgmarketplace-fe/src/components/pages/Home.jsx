@@ -3,8 +3,15 @@ import Navigation from "../Navigation";
 import VerificationWarning from "../VerificationWarning";
 import TopHero from "../TopHero";
 import Trends from "../Trends";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getCurrentUser } from "../../redux/actions";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   return (
     <Container
       fluid

@@ -22,8 +22,16 @@ $theme-colors: (
   cursor: pointer;
 }
 
-.trends-list > .row:nth-child(even){
+.trends-list > .row:nth-child(even) {
   background-color: #00a3ff;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+  background-color: #00a3ff !important;
+}
+
+.nav-pills .nav-link{
+  color: #00a3ff;
 }
 
 @import "~bootstrap/scss/bootstrap.scss";
@@ -37,5 +45,4 @@ html {
 body {
   font-family: "Ubuntu", sans-serif;
 }
-
 

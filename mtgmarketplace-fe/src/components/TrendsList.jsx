@@ -9,7 +9,7 @@ const TrendsList = () => {
           <Col md={1}>
             <AiOutlineCamera />
           </Col>
-          <Col class>
+          <Col>
             <h5>f</h5>
           </Col>
         </Row>
