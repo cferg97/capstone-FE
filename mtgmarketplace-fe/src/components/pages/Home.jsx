@@ -11,6 +11,7 @@ import { getCurrentUser } from "../../redux/actions";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user?.currentUser);
 
   return (
     <Container
@@ -18,7 +19,7 @@ const Home = () => {
       className="m-0 p-0"
       style={{ width: "100%", height: "100%" }}
     >
-      <VerificationWarning />
+      {currentUser?.active === (false || undefined) && <VerificationWarning />}
       <TopHero />
       <Trends />
     </Container>

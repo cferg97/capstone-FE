@@ -1,4 +1,13 @@
-import { Navbar, Container, Nav, Form, Col, Button } from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Nav,
+  Form,
+  Col,
+  Button,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineMail, MdOutlineShoppingBag } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
@@ -9,8 +18,13 @@ import LoginDropdown from "./LogInDropdown";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
+  const loggedIn = useSelector((state) => state.user?.loggedIn);
+  const currentUser = useSelector((state) => state.user?.currentUser);
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -29,6 +43,11 @@ const Navigation = () => {
       return;
     }
   }, []);
+
+  const onLogoutHandler = () => {
+    localStorage.removeItem("userAccessToken");
+    window.location.reload(true);
+  };
 
   return (
     <>
@@ -65,16 +84,22 @@ const Navigation = () => {
             <Container
               className="d-flex"
               style={{
-                maxWidth: "20rem",
+                maxWidth: "26rem",
                 marginLeft: "auto",
                 marginRight: "0",
                 alignItems: "center",
               }}
             >
-              <Link to="/register">
+              <Link
+                to="/register"
+                style={{ visibility: loggedIn === true ? "hidden" : "" }}
+              >
                 <Button
                   className="text-white mx-2"
-                  style={{ fontSize: "0.8rem" }}
+                  style={{
+                    fontSize: "0.8rem",
+                    visibility: loggedIn === true ? "hidden" : "",
+                  }}
                   variant="primary"
                 >
                   Sign Up
@@ -82,12 +107,17 @@ const Navigation = () => {
               </Link>
               <Button
                 className="text-white"
-                style={{ fontSize: "0.8rem", position: "relative" }}
+                style={{
+                  fontSize: "0.8rem",
+                  position: "relative",
+                  visibility: loggedIn === true ? "hidden" : "",
+                }}
                 variant="primary"
                 onClick={() => handleShowLogin()}
               >
                 Log In
               </Button>
+
               <Col className="d-flex mx-auto flex-column align-items-center">
                 <MdOutlineShoppingBag
                   style={{
@@ -95,6 +125,7 @@ const Navigation = () => {
                     lineHeight: "3rem",
                     marginTop: "auto",
                     marginBottom: "auto",
+                    display: loggedIn === true ? "" : "none",
                   }}
                 />
               </Col>
@@ -106,11 +137,30 @@ const Navigation = () => {
                     lineHeight: "3rem",
                     marginTop: "auto",
                     marginBottom: "auto",
+                    display: loggedIn === true ? "" : "none",
                   }}
                 />
               </Col>
 
-              <Col className="d-flex flex-column align-items-center" style={{}}>
+              <DropdownButton
+                style={{ display: loggedIn === true ? "" : "none" }}
+                drop="start"
+                className="nav-dropdown"
+                title={currentUser?.username || ""}
+              >
+                <Dropdown.Item>View my profile</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.ItemText>
+                  <Button
+                    variant="heavily-played"
+                    onClick={() => onLogoutHandler()}
+                  >
+                    Log Out
+                  </Button>
+                </Dropdown.ItemText>
+              </DropdownButton>
+
+              {/* <Col className="d-flex flex-column align-items-center" style={{}}>
                 <FaUserCircle
                   style={{
                     fontSize: "2rem",
@@ -119,7 +169,8 @@ const Navigation = () => {
                     marginBottom: "auto",
                   }}
                 />
-              </Col>
+                
+              </Col> */}
             </Container>
           </Nav>
         </Container>

@@ -1,7 +1,12 @@
-import { SET_CURRENT_USER } from "../actions";
+import {
+  SET_CURRENT_PROFILE,
+  SET_CURRENT_USER,
+} from "../actions";
 
 const initialState = {
+  loggedIn: false,
   currentUser: [],
+  selectedProfile: [],
   loading: false,
   error: false,
 };
@@ -12,6 +17,13 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.payload,
+        loggedIn: true,
+      };
+    }
+    case SET_CURRENT_PROFILE: {
+      return {
+        ...state,
+        selectedProfile: action.payload,
       };
     }
     default:
