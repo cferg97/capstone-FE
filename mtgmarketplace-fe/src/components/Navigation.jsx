@@ -8,7 +8,6 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineMail, MdOutlineShoppingBag } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { useState } from "react";
@@ -18,12 +17,10 @@ import LoginDropdown from "./LogInDropdown";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../redux/actions";
-import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const loggedIn = useSelector((state) => state.user?.loggedIn);
   const currentUser = useSelector((state) => state.user?.currentUser);
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
@@ -52,12 +49,16 @@ const Navigation = () => {
   return (
     <>
       <LoginDropdown display={displayLogin} setDisplay={handleShowLogin} />
-      <Navbar bg="light" style={{ borderBottom: "1px solid lightgrey" }}>
+      <Navbar
+        bg="light"
+        className="site-nav"
+        style={{ borderBottom: "1px solid lightgrey" }}
+      >
         <Container fluid className="mx-4">
           <Link to="/">
             <Navbar.Brand>
               <img
-                className="img-fluid"
+                className="img-fluid site-logo"
                 style={{ maxHeight: "3rem", marginRight: "2rem" }}
                 alt="MTG Marketplace Logo"
                 src="https://res.cloudinary.com/cfcloudstorage/image/upload/v1677511785/media/CapstoneLogo_uljdiz.png"
@@ -66,20 +67,49 @@ const Navigation = () => {
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Nav className="me-auto" style={{ width: "100%" }}>
-            <Form className="d-flex" style={{ position: "relative" }}>
+            <Form
+              className="d-flex my-auto"
+              style={{
+                height: "fit-content",
+                width: "fit-content",
+                position: "relative",
+              }}
+            >
               <Form.Control
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 type="search"
-                placeholder="Search by card name, set, or type."
+                placeholder="Search MTG Marketplace..."
                 className="me-2"
-                style={{ minWidth: "20rem", width: "35rem", maxWidth: "35rem" }}
+                style={{
+                  minWidth: "20rem",
+                  height: "2.4rem",
+                  width: "35rem",
+                  maxWidth: "35rem",
+                }}
                 aria-label="Search"
               />
               <Container className="search-bar-btn p-0">
                 <BsSearch />
               </Container>
             </Form>
+
+            <DropdownButton
+              className="my-auto mx-3"
+              variant="outline"
+              size="sm"
+            >
+              <Dropdown.Item>
+                <Link style={{ textDecoration: "none" }} to="/members/all">
+                  Advanced Search
+                </Link>
+              </Dropdown.Item>
+              <Dropdown.Item>
+                <Link style={{ textDecoration: "none" }} to="/users/search">
+                  Members Search
+                </Link>
+              </Dropdown.Item>
+            </DropdownButton>
 
             <Container
               className="d-flex"
@@ -143,13 +173,30 @@ const Navigation = () => {
               </Col>
 
               <DropdownButton
-                style={{ display: loggedIn === true ? "" : "none" }}
+                style={{
+                  display: loggedIn === true ? "" : "none",
+                  zIndex: "7",
+                }}
                 drop="start"
                 className="nav-dropdown"
                 title={currentUser?.username || ""}
               >
-                <Dropdown.Item>View my profile</Dropdown.Item>
-                <Dropdown.Divider />
+                <Dropdown.Item>
+                  <Link
+                    to={"/users/profile/" + currentUser?.username}
+                    style={{ textDecoration: "none" }}
+                  >
+                    View my profile
+                  </Link>{" "}
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to="/users/profile/edit"
+                  >
+                    Edit my details
+                  </Link>
+                </Dropdown.Item>
                 <Dropdown.ItemText>
                   <Button
                     variant="heavily-played"

@@ -4,6 +4,9 @@ import Navigation from "./components/Navigation";
 import Register from "./components/pages/Register";
 import UserProfileEdit from "./components/pages/UserProfileEdit";
 import UserProfile from "./components/pages/UserProfile";
+import MemberList from "./components/pages/MemberList";
+import MyFooter from "./components/Footer";
+import CardInfoPage from "./components/pages/cardInfo";
 
 function App() {
   return (
@@ -15,11 +18,15 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route
             exact
-            path="/user/profile/edit"
+            path="/users/profile/edit"
             element={<UserProfileEdit />}
           />
-          <Route path="/user/profile/:username" element={<UserProfile />} />
+          <Route path="/users/search" element={<MemberList />} />
+          <Route path="/users/profile/:username" element={<UserProfile />} />
+          <Route path="/product/:cardId" element={<CardInfoPage />} />
         </Routes>
+
+        <MyFooter />
       </Router>
     </>
   );

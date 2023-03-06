@@ -61,12 +61,12 @@ const UserProfile = () => {
           className="text-center"
           style={{ borderLeft: "1px solid lightgrey" }}
         >
-          <Row>
+          <Row style={{justifyContent: 'center'}}>
             <img
               src={`https://flagcdn.com/${countryCode[0]}.svg`}
-              style={{ width: '3rem', height: '20px'}}
+              style={{ width: '4rem'}}
               alt={fetchUserProfile?.country}
-            />
+            />  
             <h6>{fetchedProfile?.country}</h6>
           </Row>
         </Col>

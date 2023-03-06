@@ -7,6 +7,7 @@ const initialState = {
   loggedIn: false,
   currentUser: [],
   selectedProfile: [],
+  searchResults: [],
   loading: false,
   error: false,
 };

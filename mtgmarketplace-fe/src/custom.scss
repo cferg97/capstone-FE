@@ -26,15 +26,16 @@ $theme-colors: (
   background-color: #00a3ff;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   background-color: #00a3ff !important;
 }
 
-.nav-pills .nav-link{
+.nav-pills .nav-link {
   color: #00a3ff;
 }
 
-.nav-dropdown > .btn  {
+.nav-dropdown > .btn {
   font-size: 0.8rem;
   color: white;
 }
@@ -49,5 +50,23 @@ html {
 
 body {
   font-family: "Ubuntu", sans-serif;
+  overflow-x: hidden;
 }
 
+.member-list-item:nth-child(2n){
+  background-color: lightgrey;
+}
+
+.card-view-img:hover{
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1088px) {
+  .site-logo {
+    display: none;
+  }
+
+  .site-nav{
+    display: none;
+  }
+}

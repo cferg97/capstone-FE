@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "../../redux/actions";
+import SecondaryNav from "../SecondaryNav";
 
 const Home = () => {
   const dispatch = useDispatch();
