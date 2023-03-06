@@ -100,7 +100,7 @@ const Navigation = () => {
               size="sm"
             >
               <Dropdown.Item>
-                <Link style={{ textDecoration: "none" }} to="/members/all">
+                <Link style={{ textDecoration: "none" }} to="/products/search">
                   Advanced Search
                 </Link>
               </Dropdown.Item>

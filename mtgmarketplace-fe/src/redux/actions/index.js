@@ -2,6 +2,30 @@ export const SET_LOGGED_IN = "SET_LOGGED_IN";
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
+export const SET_SETS = "SET_SETS";
+
+export const retrieveSetData = () => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch("http://localhost:3001/sets", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SET_SETS,
+          payload: fetchedData,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 export const newUserAction = (newUserInfo) => {
   return async (dispatch) => {

@@ -8,6 +8,7 @@ import userReducer from "../reducers/users";
 import searchReducer from "../reducers/search";
 import { persistReducer, persistStore } from "redux-persist";
 import { encryptTransform } from "redux-persist-transform-encrypt";
+import setReducer from "../reducers/sets";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const persistConfig = {
 const mainReducer = combineReducers({
   user: userReducer,
   search: searchReducer,
+  sets: setReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, mainReducer);
@@ -34,5 +36,4 @@ export const store = configureStore({
     }),
 });
 
-
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);

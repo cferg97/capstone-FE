@@ -11,6 +11,7 @@ import "yet-another-react-lightbox/styles.css";
 const CardInfoPage = () => {
   const [openImg, setOpenImg] = useState(false);
 
+
   return (
     <>
       <Container>
@@ -60,6 +61,7 @@ const CardInfoPage = () => {
         zoom={{ maxZoomPixelRatio: 2, scrollToZoom: false }}
         plugins={[Zoom]}
         close={() => setOpenImg(false)}
+
         slides={[
           {
             src: "https://cards.scryfall.io/normal/front/0/0/000376ef-8b6c-490d-98cb-d6de15b2e585.jpg?1673306662",

@@ -7,6 +7,7 @@ import UserProfile from "./components/pages/UserProfile";
 import MemberList from "./components/pages/MemberList";
 import MyFooter from "./components/Footer";
 import CardInfoPage from "./components/pages/cardInfo";
+import SearchResults from "./components/pages/searchResults";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           />
           <Route path="/users/search" element={<MemberList />} />
           <Route path="/users/profile/:username" element={<UserProfile />} />
-          <Route path="/product/:cardId" element={<CardInfoPage />} />
+          <Route exact path="/products/search" element={<SearchResults />} />
+          <Route path="/products/:cardId" element={<CardInfoPage />} />
         </Routes>
 
         <MyFooter />
