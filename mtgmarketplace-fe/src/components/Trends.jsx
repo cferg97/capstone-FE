@@ -2,8 +2,32 @@ import { Container, Row, Col } from "react-bootstrap";
 import { FaChartLine } from "react-icons/fa";
 import TrendsCards from "./TrendsCards";
 import TrendsList from "./TrendsList";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getTrendsAction } from "../redux/actions";
 
 const Trends = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTrendsAction());
+  }, []);
+
+  const bestSellers = useSelector((state) => state.frontPage?.trends);
+
+  const arr = [];
+
+  const fetchImages = () => {
+    bestSellers.forEach((card) => {
+      arr.push(card.cardmarketId);
+    });
+  };
+
+  fetchImages();
+
+
+
   return (
     <>
       <Container
@@ -18,15 +42,16 @@ const Trends = () => {
           <Col className="ml-auto mr-auto" style={{ textAlign: "center" }}>
             <h4>Best Sellers</h4>
             <Row className="mx-auto" style={{ width: "95%" }}>
-              <Col>
-                <TrendsCards />
-              </Col>
-              <Col>
-                <TrendsCards />
-              </Col>
-              <Col>
-                <TrendsCards />
-              </Col>
+              {bestSellers?.slice(0, 3).map((card, idx) => (
+                <Col key={idx}>
+                  <TrendsCards
+                    cardName={card?.name}
+                    set={card?.set}
+                    price={"£" + card?.price}
+                    id={card?.cardmarketId}
+                  />
+                </Col>
+              ))}
             </Row>
             <Row className="mt-3">
               <Col>

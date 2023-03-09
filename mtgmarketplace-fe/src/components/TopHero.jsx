@@ -12,39 +12,43 @@ const TopHero = () => {
               objectFit: "cover",
               objectPosition: "center -60px",
             }}
-            src="https://www.wargamer.com/wp-content/sites/wargamer/2022/08/magic-the-gathering-mtg-set-release-dates-2023.jpg"
+            src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/08/Ugin-the-spirit-dragon.jpg?q=50&fit=contain&w=1140&h=&dpr=1.5"
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3 style={{ color: "black" }}>Welcome to MTG Marketplace</h3>
+            <img
+              style={{height: '5rem'}}
+              src="https://res.cloudinary.com/cfcloudstorage/image/upload/v1677511785/media/CapstoneLogo_uljdiz.png"
+              alt=""
+            />
+            {/* <h3>MTG Marketplace</h3>
+            <h6>dfdfdffd</h6> */}
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            style={{ height: "20rem", objectFit: "cover" }}
+            style={{ height: "20rem", objectFit: "cover", objectPosition: 'center -90px' }}
             src="https://media.wizards.com/2022/images/daily/2FQgt9tsRFsL.png"
             alt="Second slide"
           />
 
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3>Phryrexia: All Will Be One</h3>
+            <h6>Now available!</h6>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
-            style={{ height: "20rem" }}
+            style={{ height: "20rem", objectFit: "cover", objectPosition: 'center -70px' }}
             className="d-block w-100"
-            src="https://images.unsplash.com/photo-1677527112651-c852d3c5cef7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1190&q=80"
-            alt="Third slide"
+            src="https://rare-gallery.com/uploads/posts/958521-Magic-The-Gathering-artwork-video-game-art-Liliana.png"
+            alt=""
           />
 
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+            <h3>Come work with us!</h3>
+            <h6>We're hiring.</h6>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

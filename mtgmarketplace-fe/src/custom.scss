@@ -43,6 +43,11 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap.scss";
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap");
 
+.carousel-caption{
+  background: rgba(0,0,0,0.3);
+  border-radius: 20px;
+}
+
 html {
   height: 100vh;
   width: 100vw;

@@ -2,7 +2,10 @@ export const SET_LOGGED_IN = "SET_LOGGED_IN";
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
+export const SET_CURRENT_CARD = "SET_CURRENT_CARD";
 export const SET_SETS = "SET_SETS";
+export const SET_TRENDS = "SET_TRENDS";
+export const SET_BARGAINS = "SET_BARGAINS";
 
 export const retrieveSetData = () => {
   return async (dispatch) => {
@@ -122,6 +125,31 @@ export const fetchUserProfile = (username) => {
           payload: fetchedData,
         });
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const searchByName = (searchQuery) => {
+  return async (dispatch) => {};
+};
+
+export const getTrendsAction = () => {
+  return async (dispatch) => {
+    try {
+      let response = await fetch(
+        "http://localhost:3001/sell?sort=-quantity&limit=10"
+      );
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SET_TRENDS,
+          payload: fetchedData.products,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
