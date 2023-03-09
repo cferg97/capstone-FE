@@ -5,16 +5,18 @@ import TrendsList from "./TrendsList";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getTrendsAction } from "../redux/actions";
+import { getBargainsAction, getTrendsAction } from "../redux/actions";
 
 const Trends = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTrendsAction());
+    dispatch(getBargainsAction());
   }, []);
 
   const bestSellers = useSelector((state) => state.frontPage?.trends);
+  const bargains = useSelector((state) => state.frontPage?.bargains);
 
   const arr = [];
 
@@ -25,8 +27,6 @@ const Trends = () => {
   };
 
   fetchImages();
-
-
 
   return (
     <>
@@ -48,7 +48,7 @@ const Trends = () => {
                     cardName={card?.name}
                     set={card?.set}
                     price={"£" + card?.price}
-                    id={card?.cardmarketId}
+                    cmID={card?.cardmarketId}
                   />
                 </Col>
               ))}
@@ -62,15 +62,16 @@ const Trends = () => {
           <Col style={{ textAlign: "center" }}>
             <h4>Best Bargains</h4>
             <Row className="mx-auto" style={{ width: "95%" }}>
-              <Col>
-                <TrendsCards />
-              </Col>
-              <Col>
-                <TrendsCards />
-              </Col>
-              <Col>
-                <TrendsCards />
-              </Col>
+              {bargains?.slice(0, 3).map((card, idx) => (
+                <Col>
+                  <TrendsCards
+                    cardName={card?.name}
+                    set={card?.set}
+                    price={"£" + card?.price}
+                    cmID={card?.cardmarketId}
+                  />
+                </Col>
+              ))}
             </Row>
             <Row className="mt-3">
               <Col>

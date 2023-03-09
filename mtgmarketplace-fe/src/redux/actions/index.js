@@ -139,12 +139,31 @@ export const getTrendsAction = () => {
   return async (dispatch) => {
     try {
       let response = await fetch(
-        "http://localhost:3001/sell?sort=-quantity&limit=10"
+        "http://localhost:3001/sell?sort=-price&limit=10"
       );
       if (response.ok) {
         let fetchedData = await response.json();
         dispatch({
           type: SET_TRENDS,
+          payload: fetchedData.products,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getBargainsAction = () => {
+  return async (dispatch) => {
+    try {
+      let response = await fetch(
+        "http://localhost:3001/sell?sort=price&limit=10"
+      );
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SET_BARGAINS,
           payload: fetchedData.products,
         });
       }

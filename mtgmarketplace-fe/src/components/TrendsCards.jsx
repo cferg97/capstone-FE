@@ -1,20 +1,12 @@
 import { Card } from "react-bootstrap";
 
-const TrendsCards = ({ cardName, set, price, id }) => {
-  let img_url;
-  const fetchUrl = async () => {
-    let response = await fetch(`http://localhost:3001/cards/images/${id}`);
-    if (response.ok) {
-      let fetchedData = await response.json();
-      // console.log(fetchedData[0].image_uris.normal);
-      img_url = await fetchedData[0].image_uris.normal
-    }
-  };
-  fetchUrl();
+const TrendsCards = ({ cardName, set, price, cmID }) => {
+  const img = `https://api.scryfall.com/cards/cardmarket/${cmID}?format=image`;
+
   return (
     <>
       <Card style={{ border: "none" }}>
-        <Card.Img src={img_url} />
+        <Card.Img src={img} />
         <h5>{cardName}</h5>
         <h6>
           {set} | {price}
