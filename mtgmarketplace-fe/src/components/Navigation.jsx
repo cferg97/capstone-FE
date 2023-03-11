@@ -42,8 +42,8 @@ const Navigation = () => {
   }, []);
 
   const onLogoutHandler = () => {
-    localStorage.removeItem("userAccessToken");
-    window.location.reload(true);
+    localStorage.clear();
+    window.location.reload(false);
   };
 
   return (

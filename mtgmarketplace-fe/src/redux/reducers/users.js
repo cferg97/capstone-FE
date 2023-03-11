@@ -1,6 +1,8 @@
 import {
   SET_CURRENT_PROFILE,
   SET_CURRENT_USER,
+  SET_CURRENT_CARD,
+  CURRENT_CARD_LISTINGS,
 } from "../actions";
 
 const initialState = {
@@ -8,6 +10,8 @@ const initialState = {
   currentUser: [],
   selectedProfile: [],
   searchResults: [],
+  selectedProduct: [],
+  selectedProductListings: [],
   loading: false,
   error: false,
 };
@@ -25,6 +29,18 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedProfile: action.payload,
+      };
+    }
+    case SET_CURRENT_CARD: {
+      return {
+        ...state,
+        selectedProduct: action.payload,
+      };
+    }
+    case CURRENT_CARD_LISTINGS: {
+      return {
+        ...state,
+        selectedProductListings: action.payload,
       };
     }
     default:

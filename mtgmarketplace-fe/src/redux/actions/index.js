@@ -3,6 +3,7 @@ export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
 export const SET_CURRENT_CARD = "SET_CURRENT_CARD";
+export const CURRENT_CARD_LISTINGS = "CURRENT_CARD_LISTINGS";
 export const SET_SETS = "SET_SETS";
 export const SET_TRENDS = "SET_TRENDS";
 export const SET_BARGAINS = "SET_BARGAINS";
@@ -166,6 +167,44 @@ export const getBargainsAction = () => {
           type: SET_BARGAINS,
           payload: fetchedData.products,
         });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const setCurrentProductAction = (id) => {
+  return async (dispatch) => {
+    try {
+      let response = await fetch(`http://localhost:3001/cards/singles/${id}`);
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SET_CURRENT_CARD,
+          payload: fetchedData,
+        });
+      } else {
+        console.log("error fetching card info");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const getCurrentProductListings = (id) => {
+  return async (dispatch) => {
+    try {
+      let response = await fetch(`http://localhost:3001/sell/${id}`);
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: CURRENT_CARD_LISTINGS,
+          payload: fetchedData,
+        });
+      } else {
+        console.log("err fetching listings");
       }
     } catch (err) {
       console.log(err);

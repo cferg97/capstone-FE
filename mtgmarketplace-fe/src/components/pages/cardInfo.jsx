@@ -7,19 +7,44 @@ import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import {
+  getCurrentProductListings,
+  setCurrentProductAction,
+} from "../../redux/actions";
 
 const CardInfoPage = () => {
   const [openImg, setOpenImg] = useState(false);
 
+  const params = useParams();
+  const id = params.cardmarketId;
+
+  const dispatch = useDispatch();
+
+  const currentCard = useSelector((state) => state.user?.selectedProduct);
+
+  useEffect(() => {
+    dispatch(setCurrentProductAction(id));
+    console.log("fetched");
+  }, [id]);
+
+  const listings = useSelector((state) => state.user?.selectedProductListings);
+
+  useEffect(() => {
+    dispatch(getCurrentProductListings(currentCard?.cardmarket_id));
+  }, [currentCard]);
 
   return (
     <>
       <Container>
         <Row className="my-2">
           <Col>
-            <h2>Card Name</h2>
+            <h2>{currentCard?.name}</h2>
             <h6 className="text-muted">
-              <i>Set Name</i>
+              <i>{currentCard?.set_name}</i>
             </h6>
           </Col>
           <hr />
@@ -32,7 +57,7 @@ const CardInfoPage = () => {
                 className="img-fluid card-view-img"
                 style={{ maxHeight: "20rem" }}
                 alt="card title"
-                src="https://cards.scryfall.io/normal/front/0/0/000376ef-8b6c-490d-98cb-d6de15b2e585.jpg?1673306662"
+                src={currentCard?.image_uris?.normal}
               />
             </Container>
           </Col>
@@ -43,7 +68,7 @@ const CardInfoPage = () => {
             >
               <Tab eventKey="info" title={<HiInformationCircle />}>
                 <Container>
-                  <CardInfo />
+                  <CardInfo card={currentCard || ""} />
                 </Container>
               </Tab>
               <Tab eventKey="sell" title={<MdSell />}>
@@ -54,6 +79,11 @@ const CardInfoPage = () => {
           </Col>
           <hr className="my-2" />
         </Row>
+        <Row>
+          {listings?.map((i) => (
+            <li>{i.name}</li>
+          ))}
+        </Row>
       </Container>
       <Lightbox
         styles={{ container: { backgroundColor: "rgba(0,0,0,0.8)" } }}
@@ -61,10 +91,9 @@ const CardInfoPage = () => {
         zoom={{ maxZoomPixelRatio: 2, scrollToZoom: false }}
         plugins={[Zoom]}
         close={() => setOpenImg(false)}
-
         slides={[
           {
-            src: "https://cards.scryfall.io/normal/front/0/0/000376ef-8b6c-490d-98cb-d6de15b2e585.jpg?1673306662",
+            src: currentCard?.image_uris?.large,
           },
         ]}
       />

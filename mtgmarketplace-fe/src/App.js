@@ -25,7 +25,7 @@ function App() {
           <Route path="/users/search" element={<MemberList />} />
           <Route path="/users/profile/:username" element={<UserProfile />} />
           <Route exact path="/products/search" element={<SearchResults />} />
-          <Route path="/products/:cardId" element={<CardInfoPage />} />
+          <Route path="/products/:cardmarketId" element={<CardInfoPage />} />
         </Routes>
 
         <MyFooter />
