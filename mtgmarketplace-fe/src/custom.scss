@@ -43,8 +43,8 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap.scss";
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400&display=swap");
 
-.carousel-caption{
-  background: rgba(0,0,0,0.3);
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 20px;
 }
 
@@ -58,11 +58,19 @@ body {
   overflow-x: hidden;
 }
 
-.member-list-item:nth-child(2n){
+.member-list-item:nth-child(2n) {
   background-color: lightgrey;
 }
 
-.card-view-img:hover{
+.listing-con:nth-child(2n) {
+  background-color: lightgray;
+}
+
+.search-res-display:nth-child(odd) {
+  background-color: lightgray;
+}
+
+.card-view-img:hover {
   cursor: pointer;
 }
 
@@ -71,7 +79,7 @@ body {
     display: none;
   }
 
-  .site-nav{
+  .site-nav {
     display: none;
   }
 }

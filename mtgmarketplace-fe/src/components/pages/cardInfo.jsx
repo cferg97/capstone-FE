@@ -15,6 +15,7 @@ import {
   getCurrentProductListings,
   setCurrentProductAction,
 } from "../../redux/actions";
+import ListingDisplay from "../ListingDisplay";
 
 const CardInfoPage = () => {
   const [openImg, setOpenImg] = useState(false);
@@ -79,9 +80,23 @@ const CardInfoPage = () => {
           </Col>
           <hr className="my-2" />
         </Row>
+        <Row
+          className="text-center mb-2 p-1"
+          style={{ backgroundColor: "#EDEDED" }}
+        >
+          <Col style={{ borderRight: "1px solid grey" }}>
+            <b>Seller</b>
+          </Col>
+          <Col style={{ borderRight: "1px solid grey" }}>
+            <b>Product Information</b>
+          </Col>
+          <Col>
+            <b>Offer</b>
+          </Col>
+        </Row>
         <Row>
-          {listings?.map((i) => (
-            <li>{i.name}</li>
+          {listings.map((item, idx) => (
+            <ListingDisplay key={idx} info={item} seller={item.sellerId} />
           ))}
         </Row>
       </Container>

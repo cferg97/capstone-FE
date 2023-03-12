@@ -16,12 +16,14 @@ import { useEffect } from "react";
 import LoginDropdown from "./LogInDropdown";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getCurrentUser } from "../redux/actions";
+import { getCurrentUser, searchByName } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const loggedIn = useSelector((state) => state.user?.loggedIn);
   const currentUser = useSelector((state) => state.user?.currentUser);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -43,7 +45,15 @@ const Navigation = () => {
 
   const onLogoutHandler = () => {
     localStorage.clear();
-    window.location.reload(false);
+    window.location.reload(true);
+  };
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    dispatch(searchByName(searchQuery));
+    if (searchQuery !== "") {
+      navigate("/products/search");
+    }
   };
 
   return (
@@ -68,6 +78,7 @@ const Navigation = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Nav className="me-auto" style={{ width: "100%" }}>
             <Form
+              onSubmit={(e) => onSearch(e)}
               className="d-flex my-auto"
               style={{
                 height: "fit-content",
@@ -89,15 +100,16 @@ const Navigation = () => {
                 }}
                 aria-label="Search"
               />
-              <Container className="search-bar-btn p-0">
+              <button type="submit" className="search-bar-btn p-0">
                 <BsSearch />
-              </Container>
+              </button>
             </Form>
 
             <DropdownButton
               className="my-auto mx-3"
               variant="outline"
               size="sm"
+              title=""
             >
               <Dropdown.Item>
                 <Link style={{ textDecoration: "none" }} to="/products/search">

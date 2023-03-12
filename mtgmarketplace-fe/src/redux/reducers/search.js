@@ -1,4 +1,4 @@
-import { SET_SEARCH_QUERY } from "../actions";
+import { SET_SEARCH_QUERY, SET_SEARCH_RESULTS } from "../actions";
 
 const initialState = {
   searchQuery: "",
@@ -12,6 +12,12 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         searchQuery: action.payload,
+      };
+    }
+    case SET_SEARCH_RESULTS: {
+      return {
+        ...state,
+        searchResults: action.payload,
       };
     }
     default:

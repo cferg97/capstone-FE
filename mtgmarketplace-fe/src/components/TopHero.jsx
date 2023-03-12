@@ -48,7 +48,7 @@ const TopHero = () => {
 
           <Carousel.Caption>
             <h3>Come work with us!</h3>
-            <h6>I need help</h6>
+            <h6>I require assistance with this project</h6>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

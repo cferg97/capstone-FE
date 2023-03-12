@@ -7,6 +7,7 @@ export const CURRENT_CARD_LISTINGS = "CURRENT_CARD_LISTINGS";
 export const SET_SETS = "SET_SETS";
 export const SET_TRENDS = "SET_TRENDS";
 export const SET_BARGAINS = "SET_BARGAINS";
+export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 
 export const retrieveSetData = () => {
   return async (dispatch) => {
@@ -133,7 +134,43 @@ export const fetchUserProfile = (username) => {
 };
 
 export const searchByName = (searchQuery) => {
-  return async (dispatch) => {};
+  return async (dispatch) => {
+    try {
+      let response = await fetch(
+        `http://localhost:3001/search?name=/^.*${searchQuery}.*/i`
+      );
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SET_SEARCH_RESULTS,
+          payload: fetchedData.products,
+        });
+      } else {
+        console.log("Couldn't fetch search results");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const advancedSearchAction = (url) => {
+  return async (dispatch) => {
+    try {
+      let response = await fetch(url);
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SET_SEARCH_RESULTS,
+          payload: fetchedData.products,
+        });
+      } else {
+        console.log("Couldn't fetch search results");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
 
 export const getTrendsAction = () => {
