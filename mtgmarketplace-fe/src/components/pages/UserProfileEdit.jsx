@@ -1,8 +1,38 @@
 import { Container, Col, Nav, Row, Tab, Form, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editProfileAction } from "../../redux/actions";
 
 const UserProfileEdit = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
+
+  const [username, setUsername] = useState(currentUser?.username);
+  const [firstName, setFirstName] = useState(currentUser?.firstName);
+  const [lastName, setLastName] = useState(currentUser?.lastName);
+  const [street, setStreet] = useState(currentUser?.street);
+  const [city, setCity] = useState(currentUser?.city);
+  const [zip, setZip] = useState(currentUser?.zip);
+  const [country, setCountry] = useState(currentUser?.country);
+
+  const userBasicSend = {
+    username: username,
+    firstName: firstName,
+    lastName: lastName,
+  };
+
+  const userAddressSend = {
+    street: street,
+    zip: zip,
+    city: city,
+    country: country,
+  };
+
+  const onSend = (e, formType) => {
+    e.preventDefault();
+    dispatch(editProfileAction(formType));
+  };
 
   if (currentUser) {
     return (
@@ -47,10 +77,12 @@ const UserProfileEdit = () => {
                 <Container>
                   <h3 className="my-2">Basic Information</h3>
                   <Container>
-                    <Form>
+                    <Form onSubmit={(e) => onSend(e, userBasicSend)}>
                       <Form.Group className="mb-3">
                         <Form.Label>Username</Form.Label>
                         <Form.Control
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
                           type="text"
                           placeholder="Enter a new username"
                         />
@@ -62,6 +94,8 @@ const UserProfileEdit = () => {
                       <Form.Group className="mb-3">
                         <Form.Label>First Name</Form.Label>
                         <Form.Control
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
                           type="text"
                           placeholder="Change your first name"
                         />
@@ -74,6 +108,8 @@ const UserProfileEdit = () => {
                       <Form.Group className="mb-3">
                         <Form.Label>Last Name</Form.Label>
                         <Form.Control
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
                           type="text"
                           placeholder="Change your last name"
                         />
@@ -103,10 +139,12 @@ const UserProfileEdit = () => {
                   </p>
 
                   <Container>
-                    <Form>
+                    <Form onSubmit={(e) => onSend(e, userAddressSend)}>
                       <Form.Group className="mb-3">
                         <Form.Label>House Number/Street</Form.Label>
                         <Form.Control
+                          value={street}
+                          onChange={(e) => setStreet(e.target.value)}
                           type="text"
                           placeholder="Enter a new house number and address"
                         />
@@ -115,6 +153,8 @@ const UserProfileEdit = () => {
                       <Form.Group className="mb-3">
                         <Form.Label>City/Town</Form.Label>
                         <Form.Control
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
                           type="text"
                           placeholder="Enter a new city/town"
                         />
@@ -123,6 +163,8 @@ const UserProfileEdit = () => {
                       <Form.Group className="mb-3">
                         <Form.Label>Zip/Post Code</Form.Label>
                         <Form.Control
+                          value={zip}
+                          onChange={(e) => setZip(e.target.value)}
                           type="text"
                           placeholder="Enter a new zip/post code"
                         />
@@ -130,7 +172,10 @@ const UserProfileEdit = () => {
 
                       <Form.Group className="mb-3">
                         <Form.Label>Country</Form.Label>
-                        <Form.Select>
+                        <Form.Select
+                          value={country}
+                          onChange={(e) => setCountry(e.target.value)}
+                        >
                           <option disabled selected>
                             Select a country
                           </option>
@@ -471,7 +516,7 @@ const UserProfileEdit = () => {
               </Tab.Pane>
               <Tab.Pane eventKey="listings">
                 <Container>
-                  <h1>aaaaaaaaaaaaaaaaaaaaaaaaa</h1>
+                  <h1>Placeholder</h1>
                 </Container>
               </Tab.Pane>
             </Tab.Content>

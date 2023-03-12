@@ -97,14 +97,34 @@ export const getCurrentUser = () => {
       } else {
         console.log("Couldn't fetch user information");
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 
 export const editProfileAction = (userForm) => {
   return async (dispatch) => {
     try {
-    } catch (err) {}
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch("http://localhost:3001/users/me", {
+        method: "PUT",
+        body: JSON.stringify(userForm),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(getCurrentUser());
+      } else {
+        console.log("Couldn't update user information");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 };
 

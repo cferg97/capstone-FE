@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-duplicate-case */
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -19,21 +21,39 @@ const SearchResults = () => {
   const [rarity, setRarity] = useState("Select Card Rarity");
   const [setName, setSetName] = useState("All");
 
+  const base_url = `http://localhost:3001/search?name=/^.*${searchQuery}.*/i`;
+  let queryUrl;
+
+  const params = {
+    rarity: `&rarity=${rarity}`,
+    setName: `&set_name=${setName}`,
+  };
+
   const onSearch = (e) => {
     e.preventDefault();
     if (searchQuery !== "") {
       dispatch(searchByName(searchQuery));
-      setSearchQuery("");
     }
   };
 
   const searchResults = useSelector((state) => state.search?.searchResults);
 
-  const base_url = new URL("http://localhost:3001/search?");
-  
-  const onRarityChange = (e) => {
-    
-  }
+  const createParamString = () => {
+    if (rarity !== "Select Card Rarity" && setName !== "All") {
+      queryUrl = base_url + params.setName + params.rarity;
+      return queryUrl.toString();
+    }
+    if (rarity !== "Select Card Rarity") {
+      queryUrl = base_url + params.rarity;
+      return queryUrl.toString();
+    }
+    if (setName !== "All") {
+      queryUrl = base_url + params.setName;
+      return queryUrl.toString();
+    } else {
+      return null;
+    }
+  };
 
   return (
     <>
@@ -117,7 +137,10 @@ const SearchResults = () => {
             </Col>
             <Row className="m-0 p-0">
               <Button
-                
+                onClick={() => {
+                  createParamString();
+                  dispatch(advancedSearchAction(queryUrl));
+                }}
                 className="mx-auto"
                 style={{ width: "fit-content" }}
               >
