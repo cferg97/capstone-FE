@@ -8,12 +8,14 @@ import MemberList from "./components/pages/MemberList";
 import MyFooter from "./components/Footer";
 import CardInfoPage from "./components/pages/cardInfo";
 import SearchResults from "./components/pages/searchResults";
+import MobileNav from "./components/MobileNav";
 
 function App() {
   return (
     <>
       <Router>
         <Navigation />
+        <MobileNav/>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />

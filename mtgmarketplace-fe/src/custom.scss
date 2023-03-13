@@ -74,9 +74,23 @@ body {
   cursor: pointer;
 }
 
+.mobile-navbar {
+  display: none;
+}
+
 @media only screen and (max-width: 1088px) {
   .site-logo {
     display: none;
+  }
+
+  .hamburger-icon {
+    position: absolute;
+    right: 1rem;
+  }
+
+  .mobile-navbar {
+    display: flex;
+    position: relative;
   }
 
   .site-nav {
