@@ -83,17 +83,39 @@ body {
     display: none;
   }
 
-  .hamburger-icon {
-    position: absolute;
-    right: 1rem;
-  }
-
   .mobile-navbar {
     display: flex;
     position: relative;
   }
 
+  .hamburger-icon {
+    position: absolute;
+    right: 1rem;
+  }
+
+  .mobile-nav-search > .mobile-nav-search-btn {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+  }
+
+  .mob-search{
+    width: 16.5rem,
+  }
+
+  // .mobile-nav-search-btn {
+  //   position: absolute;
+  //   z-index: 3;
+  //   right: 0;
+  // }
+
   .site-nav {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 346px) {
+  .mob-search{
+    width: 13rem;
   }
 }

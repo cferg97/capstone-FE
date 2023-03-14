@@ -48,7 +48,7 @@ const SearchDisplay = ({ info }) => {
                     <img
                       style={{ height: "15rem" }}
                       alt=""
-                      src={info.image_uris.normal || ""}
+                      src={info?.image_uris.normal || ""}
                     />
                   </Popover>
                 }

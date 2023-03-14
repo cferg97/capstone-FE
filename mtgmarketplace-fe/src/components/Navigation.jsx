@@ -7,6 +7,7 @@ import {
   Button,
   Dropdown,
   DropdownButton,
+  Badge,
 } from "react-bootstrap";
 import { MdOutlineMail, MdOutlineShoppingBag } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
@@ -16,12 +17,17 @@ import { useEffect } from "react";
 import LoginDropdown from "./LogInDropdown";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getCurrentUser, searchByName } from "../redux/actions";
+import {
+  fetchUserCartAction,
+  getCurrentUser,
+  searchByName,
+} from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const loggedIn = useSelector((state) => state.user?.loggedIn);
   const currentUser = useSelector((state) => state.user?.currentUser);
+  const cart = useSelector((state) => state.userCart?.cart);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,6 +44,7 @@ const Navigation = () => {
   useEffect(() => {
     if (userAccessToken !== null) {
       dispatch(getCurrentUser());
+      dispatch(fetchUserCartAction());
     } else {
       return;
     }
@@ -161,7 +168,20 @@ const Navigation = () => {
               </Button>
 
               <Col className="d-flex mx-auto flex-column align-items-center">
-                <MdOutlineShoppingBag
+                <Badge style={{position: 'absolute', zIndex: '4', top: 5,}}>
+                  {cart?.length}
+                </Badge>
+                <img
+                  style={{
+                    marginTop: '5px',
+                    height: "30px",
+                    filter:
+                      "invert(47%) sepia(1%) saturate(2555%) hue-rotate(167deg) brightness(96%) contrast(98%)",
+                  }}
+                  src="https://www.svgrepo.com/show/477563/shopping-cart-free-16.svg"
+                  alt="shopping cart"
+                />
+                {/* <MdOutlineShoppingBag
                   style={{
                     fontSize: "1.5rem",
                     lineHeight: "3rem",
@@ -169,10 +189,10 @@ const Navigation = () => {
                     marginBottom: "auto",
                     display: loggedIn === true ? "" : "none",
                   }}
-                />
+                /> */}
               </Col>
 
-              <Col className="d-flex flex-column align-items-center">
+              {/* <Col className="d-flex flex-column align-items-center">
                 <MdOutlineMail
                   style={{
                     fontSize: "1.5rem",
@@ -182,7 +202,7 @@ const Navigation = () => {
                     display: loggedIn === true ? "" : "none",
                   }}
                 />
-              </Col>
+              </Col> */}
 
               <DropdownButton
                 style={{

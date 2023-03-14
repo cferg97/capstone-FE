@@ -8,6 +8,7 @@ export const SET_SETS = "SET_SETS";
 export const SET_TRENDS = "SET_TRENDS";
 export const SET_BARGAINS = "SET_BARGAINS";
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
+export const SET_USER_CART = "SET_USER_CART";
 
 export const retrieveSetData = () => {
   return async (dispatch) => {
@@ -262,6 +263,30 @@ export const getCurrentProductListings = (id) => {
         });
       } else {
         console.log("err fetching listings");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchUserCartAction = () => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch(`http://localhost:3001/carts`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: SET_USER_CART,
+          payload: fetchedData.cart[0].items,
+        });
       }
     } catch (err) {
       console.log(err);

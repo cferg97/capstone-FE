@@ -5,10 +5,10 @@ import Tooltip from "react-bootstrap/Tooltip";
 const CardInfo = ({ card }) => {
   let style;
 
-  const rarity = card?.rarity;
+  const rarity = card?.rarity || "";
 
   const rarityToDisplay =
-    rarity.toString().charAt(0).toUpperCase() + rarity.slice(1);
+    rarity?.toString().charAt(0).toUpperCase() + rarity.slice(1) || "";
 
   switch (rarity) {
     case "common": {
