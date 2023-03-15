@@ -293,3 +293,24 @@ export const fetchUserCartAction = () => {
     }
   };
 };
+
+export const addToCartAction = (id) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch(`http://localhost:3001/carts/${id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if(response.ok){
+        dispatch(fetchUserCartAction())
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};

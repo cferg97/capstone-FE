@@ -168,19 +168,21 @@ const Navigation = () => {
               </Button>
 
               <Col className="d-flex mx-auto flex-column align-items-center">
-                <Badge style={{position: 'absolute', zIndex: '4', top: 5,}}>
+                <Badge style={{ position: "absolute", zIndex: "4", top: 5 }}>
                   {cart?.length}
                 </Badge>
-                <img
-                  style={{
-                    marginTop: '5px',
-                    height: "30px",
-                    filter:
-                      "invert(47%) sepia(1%) saturate(2555%) hue-rotate(167deg) brightness(96%) contrast(98%)",
-                  }}
-                  src="https://www.svgrepo.com/show/477563/shopping-cart-free-16.svg"
-                  alt="shopping cart"
-                />
+                <Link to="/cart">
+                  <img
+                    style={{
+                      marginTop: "5px",
+                      height: "30px",
+                      filter:
+                        "invert(47%) sepia(1%) saturate(2555%) hue-rotate(167deg) brightness(96%) contrast(98%)",
+                    }}
+                    src="https://www.svgrepo.com/show/477563/shopping-cart-free-16.svg"
+                    alt="shopping cart"
+                  />
+                </Link>
                 {/* <MdOutlineShoppingBag
                   style={{
                     fontSize: "1.5rem",
