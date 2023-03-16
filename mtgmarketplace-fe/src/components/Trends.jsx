@@ -41,7 +41,7 @@ const Trends = () => {
         <Row>
           <Col className="ml-auto mr-auto" style={{ textAlign: "center" }}>
             <h4>Best Sellers</h4>
-            <Row className="mx-auto" style={{ width: "95%" }}>
+            <Row className="mx-auto" style={{ width: "95%", height: '17rem' }}>
               {bestSellers?.slice(0, 3).map((card, idx) => (
                 <Col md={4} key={idx}>
                   <TrendsCards
@@ -55,13 +55,15 @@ const Trends = () => {
             </Row>
             <Row className="mt-3">
               <Col>
-                <TrendsList />
+                {bestSellers?.slice(4,10).map((card, idx) => (
+                  <TrendsList/>
+                ))}
               </Col>
             </Row>
           </Col>
           <Col style={{ textAlign: "center" }}>
             <h4>Best Bargains</h4>
-            <Row className="mx-auto" style={{ width: "95%" }}>
+            <Row className="mx-auto" style={{ width: "95%", height: '17rem' }}>
               {bargains?.slice(0, 3).map((card, idx) => (
                 <Col md={4}>
                   <TrendsCards
@@ -75,7 +77,9 @@ const Trends = () => {
             </Row>
             <Row className="mt-3">
               <Col>
-                <TrendsList />
+                {bargains?.slice(4, 10).map((card, idx) => (
+                  <TrendsList/>
+                ))}
               </Col>
             </Row>
           </Col>

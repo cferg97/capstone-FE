@@ -168,8 +168,8 @@ const Navigation = () => {
               </Button>
 
               <Col className="d-flex mx-auto flex-column align-items-center">
-                <Badge style={{ position: "absolute", zIndex: "4", top: 5 }}>
-                  {cart?.length}
+                <Badge style={{ position: "absolute", zIndex: "4", top: 5, }}>
+                  <p style={{fontSize: '1rem'}} className="p-0 m-0">{cart?.length}</p>
                 </Badge>
                 <Link to="/cart">
                   <img

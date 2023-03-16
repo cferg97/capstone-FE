@@ -66,6 +66,14 @@ body {
   background-color: lightgray;
 }
 
+.trends-list:nth-child(odd){
+  background-color: #dedede;
+}
+
+.trends-list:nth-child(even){
+  background-color: #00a3ff;
+}
+
 .search-res-display:nth-child(odd) {
   background-color: lightgray;
 }

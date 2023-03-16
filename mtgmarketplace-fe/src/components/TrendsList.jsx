@@ -13,30 +13,6 @@ const TrendsList = () => {
             <h5>f</h5>
           </Col>
         </Row>
-        <Row>
-          <AiOutlineCamera />
-          <h5>f</h5>
-        </Row>
-        <Row>
-          <AiOutlineCamera />
-          <h5>f</h5>
-        </Row>
-        <Row>
-          <AiOutlineCamera />
-          <h5>f</h5>
-        </Row>
-        <Row>
-          <AiOutlineCamera />
-          <h5>f</h5>
-        </Row>
-        <Row>
-          <AiOutlineCamera />
-          <h5>f</h5>
-        </Row>
-        <Row>
-          <AiOutlineCamera />
-          <h5>f</h5>
-        </Row>
       </Container>
     </>
   );

@@ -285,7 +285,7 @@ export const fetchUserCartAction = () => {
         let fetchedData = await response.json();
         dispatch({
           type: SET_USER_CART,
-          payload: fetchedData.cart[0].items,
+          payload: fetchedData.items,
         });
       }
     } catch (err) {
