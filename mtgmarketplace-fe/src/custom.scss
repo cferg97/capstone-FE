@@ -87,6 +87,15 @@ body {
   display: none;
 }
 
+.latest-set-1{
+  border: 1px solid red;
+  height: 30rem;
+  background-image: url("https://i0.wp.com/mtgazone.com/wp-content/uploads/2022/08/Phyrexia-All-Will-Be-One-Elesh-Norn.jpg?fit=850%2C478&ssl=1");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: -20rem;
+}
+
 @media only screen and (max-width: 1088px) {
   .site-logo {
     display: none;
