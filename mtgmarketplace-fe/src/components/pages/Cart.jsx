@@ -41,7 +41,7 @@ const Cart = () => {
               borderRadius: "10px",
             }}
           >
-            {sellersArr.map((seller) => (
+            {sellersArr?.map((seller) => (
               <ItemDisplayCart sellerName={seller} />
             ))}
           </Col>

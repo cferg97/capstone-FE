@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 const TrendsCards = ({ cardName, set, price, cmID }) => {
   const img = `https://api.scryfall.com/cards/cardmarket/${cmID}?format=image`;
 
-  const toAbbr = (str) => {
-    return str
-      .match(/(?<=(\s|^))[a-z]/gi)
-      .join("")
-      .toUpperCase();
-  };
+
 
   return (
     <>
@@ -29,7 +24,7 @@ const TrendsCards = ({ cardName, set, price, cmID }) => {
             src={img}
             className="m-0 p-0"
           />
-          <p>{cardName}</p>
+          <p className="my-2">{cardName}</p>
           <OverlayTrigger overlay={<Tooltip>{set}</Tooltip>}>
             <Badge
               style={{
@@ -47,6 +42,8 @@ const TrendsCards = ({ cardName, set, price, cmID }) => {
           </OverlayTrigger>
         </Card>
       </Link>
+      <Badge bg="excellent" style={{
+          }}><h6 className="m-0 p-0">{price}</h6></Badge>
     </>
   );
 };

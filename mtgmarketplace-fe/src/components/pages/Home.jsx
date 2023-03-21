@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser } from "../../redux/actions";
 import SecondaryNav from "../SecondaryNav";
+import LatestSec from "../Latest";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const Home = () => {
       {currentUser?.active === (false || undefined) && <VerificationWarning />}
       <TopHero />
       <Trends />
+      <LatestSec />
     </Container>
   );
 };

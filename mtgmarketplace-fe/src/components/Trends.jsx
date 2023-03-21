@@ -31,8 +31,8 @@ const Trends = () => {
   return (
     <>
       <Container
-        className="mt-4 mb-3"
-        style={{ width: "100%", height: "60rem" }}
+        className="my-4"
+        style={{ width: "100%", height: "fit-content" }}
       >
         <h2 className="mt-2 mb-2">
           <FaChartLine /> Trends
@@ -40,8 +40,8 @@ const Trends = () => {
         <hr />
         <Row>
           <Col className="ml-auto mr-auto" style={{ textAlign: "center" }}>
-            <h4>Best Sellers</h4>
-            <Row className="mx-auto" style={{ width: "95%", height: '17rem' }}>
+            <h4 className="mb-3">Best Sellers</h4>
+            <Row className="mx-auto" style={{ width: "95%", height: '20rem' }}>
               {bestSellers?.slice(0, 3).map((card, idx) => (
                 <Col md={4} key={idx}>
                   <TrendsCards
@@ -56,14 +56,14 @@ const Trends = () => {
             <Row className="mt-3">
               <Col>
                 {bestSellers?.slice(4,10).map((card, idx) => (
-                  <TrendsList/>
+                  <TrendsList key={idx} info={card}/>
                 ))}
               </Col>
             </Row>
           </Col>
           <Col style={{ textAlign: "center" }}>
-            <h4>Best Bargains</h4>
-            <Row className="mx-auto" style={{ width: "95%", height: '17rem' }}>
+            <h4 className="mb-3">Best Bargains</h4>
+            <Row className="mx-auto" style={{ width: "95%", height: '20rem' }}>
               {bargains?.slice(0, 3).map((card, idx) => (
                 <Col md={4}>
                   <TrendsCards
@@ -78,7 +78,7 @@ const Trends = () => {
             <Row className="mt-3">
               <Col>
                 {bargains?.slice(4, 10).map((card, idx) => (
-                  <TrendsList/>
+                  <TrendsList key={idx} info={card}/>
                 ))}
               </Col>
             </Row>

@@ -5,6 +5,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Popover from "react-bootstrap/Popover";
 
 const SearchDisplay = ({ info }) => {
+  
   let style;
   const rarity = info.rarity;
   const rarityToDisplay =

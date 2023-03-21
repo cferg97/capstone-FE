@@ -9,7 +9,6 @@ import {
   DropdownButton,
   Badge,
 } from "react-bootstrap";
-import { MdOutlineMail, MdOutlineShoppingBag } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { useState } from "react";
 import { Link } from "react-router-dom";
