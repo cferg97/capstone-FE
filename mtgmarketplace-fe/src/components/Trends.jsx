@@ -47,7 +47,7 @@ const Trends = () => {
                   <TrendsCards
                     cardName={card?.name}
                     set={card?.set}
-                    price={"£" + card?.price}
+                    price={"£" + card?.price.toFixed(2)}
                     cmID={card?.cardmarketId}
                   />
                 </Col>
@@ -65,11 +65,11 @@ const Trends = () => {
             <h4 className="mb-3">Best Bargains</h4>
             <Row className="mx-auto" style={{ width: "95%", height: '20rem' }}>
               {bargains?.slice(0, 3).map((card, idx) => (
-                <Col md={4}>
+                <Col md={4} key={idx}>
                   <TrendsCards
                     cardName={card?.name}
                     set={card?.set}
-                    price={"£" + card?.price}
+                    price={"£" + card?.price.toFixed(2)}
                     cmID={card?.cardmarketId}
                   />
                 </Col>

@@ -6,6 +6,7 @@ $theme-colors: (
   "good": #d9d267,
   "lightly-played": #d98080,
   "heavily-played": #b55252,
+  "badge": #005591,
 );
 
 .search-bar-btn {
@@ -66,11 +67,11 @@ body {
   background-color: lightgray;
 }
 
-.trends-list:nth-child(odd){
+.trends-list:nth-child(odd) {
   background-color: #dedede;
 }
 
-.trends-list:nth-child(even){
+.trends-list:nth-child(even) {
   background-color: #00a3ff;
 }
 
@@ -107,8 +108,8 @@ body {
     right: 0;
   }
 
-  .mob-search{
-    width: 16.5rem,
+  .mob-search {
+    width: 16.5rem;
   }
 
   // .mobile-nav-search-btn {
@@ -123,7 +124,7 @@ body {
 }
 
 @media only screen and (max-width: 346px) {
-  .mob-search{
+  .mob-search {
     width: 13rem;
   }
 }
