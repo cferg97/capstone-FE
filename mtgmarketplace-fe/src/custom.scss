@@ -67,12 +67,13 @@ body {
   background-color: lightgray;
 }
 
+
 .trends-list:nth-child(odd) {
-  background-color: #dedede;
+  background-color: white;
 }
 
 .trends-list:nth-child(even) {
-  background-color: #00a3ff;
+  background-color: transparent;
 }
 
 .search-res-display:nth-child(odd) {
@@ -87,14 +88,130 @@ body {
   display: none;
 }
 
-.latest-set-1{
-  border: 1px solid red;
+.set-description-text {
+  position: absolute;
+  bottom: -100px;
+  color: white;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.latest-set-1:hover > .latest-set-1-overlay > .set-description-text {
+  top: 60%;
+  animation: fadeIn 0.8s forwards;
+}
+
+.latest-set-2:hover > .latest-set-2-overlay > .set-description-text {
+  top: 60%;
+  animation: fadeIn 0.8s forwards;
+}
+
+.latest-set-3:hover > .latest-set-3-overlay > .set-description-text {
+  top: 60%;
+  animation: fadeIn 0.8s forwards;
+}
+
+.latest-set-1 {
   height: 30rem;
   background-image: url("https://i0.wp.com/mtgazone.com/wp-content/uploads/2022/08/Phyrexia-All-Will-Be-One-Elesh-Norn.jpg?fit=850%2C478&ssl=1");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 200%;
   background-position-x: -20rem;
+  position: relative;
+  overflow: hidden;
 }
+
+.latest-set-1-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  height: 5rem;
+  background-color: rgba(6, 8, 138, 0.5);
+  transition: height 0.3s ease-in-out;
+}
+
+.latest-set-1:hover > .latest-set-1-overlay {
+  height: 30rem;
+}
+
+.latest-set-2:hover > .latest-set-2-overlay > .latest-set-btn {
+  display: inherit;
+  opacity: 1;
+}
+
+.latest-set-2 {
+  padding: 0;
+  height: 14.5rem;
+  background-image: url("https://cdn.vox-cdn.com/thumbor/CUNh39Jhfps0OKvxsmS0VpVcjoU=/0x0:3000x1688/1200x675/filters:focal(1260x604:1740x1084)/cdn.vox-cdn.com/uploads/chorus_image/image/71550734/BRO_KeyArt_cover.0.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+.latest-set-2-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  height: 3rem;
+  background-color: rgba(6, 8, 138, 0.5);
+  transition: height 0.3s ease-in-out;
+}
+
+.latest-set-2:hover > .latest-set-2-overlay {
+  height: 14.5rem;
+}
+
+.latest-set-3 {
+  margin-top: 1rem;
+  padding: 0;
+  height: 14.5rem;
+  background-image: url("https://static1.thegamerimages.com/wordpress/wp-content/uploads/2022/07/Dominaria-United-Key-Art-via-Wizards-of-the-Coast-logoless.jpg?q=50&fit=contain&w=1140&h=570&dpr=1.5");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.latest-set-3-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+  height: 3rem;
+  background-color: rgba(6, 8, 138, 0.5);
+  transition: height 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.latest-set-3:hover > .latest-set-3-overlay {
+  height: 14.5rem;
+}
+
+// .latest-set-1::after{
+//   height: 5rem;
+//   padding: 0;
+//   width: inherit;
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+//   background-color: red;
+//   box-sizing: inherit;
+//   border: inherit;
+
+// }
 
 @media only screen and (max-width: 1088px) {
   .site-logo {

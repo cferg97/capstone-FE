@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
-const TrendsList = ({ info }) => {
+const TrendsList = ({ info, num }) => {
   const img = `https://api.scryfall.com/cards/cardmarket/${info?.cardmarketId}?format=image`;
   return (
     <>
-      <Container className="trends-list">
+      <Container className="trends-list" style={{width: '80%'}}>
         <Row style={{height: '2rem', lineHeight: '2rem'}}>
           <Col md={1}>
             <OverlayTrigger
@@ -25,9 +25,12 @@ const TrendsList = ({ info }) => {
               />
             </OverlayTrigger>
           </Col>
+          <Col md={1}>
+            <span className="text-muted">{num+4}.</span>
+          </Col>
           <Col>
             <Link
-              style={{ textDecoration: "none", color: "inherit" }}
+              style={{ textDecoration: "none" }}
               to={"/products/" + info.cardmarketId}
             >
               {info.name}

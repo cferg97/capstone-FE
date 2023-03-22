@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { getCurrentUser } from "../../redux/actions";
 import SecondaryNav from "../SecondaryNav";
 import LatestSec from "../Latest";
+import NewsSec from "../About";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Home = () => {
       <TopHero />
       <Trends />
       <LatestSec />
+      <NewsSec />
     </Container>
   );
 };
