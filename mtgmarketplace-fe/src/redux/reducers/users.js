@@ -3,12 +3,14 @@ import {
   SET_CURRENT_USER,
   SET_CURRENT_CARD,
   CURRENT_CARD_LISTINGS,
+  GET_CURRENT_PROFILE_FEEDBACK,
 } from "../actions";
 
 const initialState = {
   loggedIn: false,
   currentUser: [],
   selectedProfile: [],
+  selectedProfileFeedback: [],
   searchResults: [],
   selectedProduct: [],
   selectedProductListings: [],
@@ -41,6 +43,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedProductListings: action.payload,
+      };
+    }
+    case GET_CURRENT_PROFILE_FEEDBACK: {
+      return {
+        ...state,
+        selectedProfileFeedback: action.payload,
       };
     }
     default:

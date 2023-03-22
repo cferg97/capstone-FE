@@ -2,6 +2,7 @@ export const SET_LOGGED_IN = "SET_LOGGED_IN";
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
+export const GET_CURRENT_PROFILE_FEEDBACK = "GET_CURRENT_PROFILE_FEEDBACK"
 export const SET_CURRENT_CARD = "SET_CURRENT_CARD";
 export const CURRENT_CARD_LISTINGS = "CURRENT_CARD_LISTINGS";
 export const SET_SETS = "SET_SETS";
@@ -314,3 +315,28 @@ export const addToCartAction = (id) => {
     }
   };
 };
+
+export const getUserFeedback = (id) => {
+  return async(dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch(`http://localhost:3001/reviews/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      if(response.ok){
+        let fetchedData = await response.json()
+        dispatch({
+          type: GET_CURRENT_PROFILE_FEEDBACK,
+          payload: fetchedData
+        })
+
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}

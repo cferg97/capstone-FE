@@ -1,10 +1,11 @@
-import { Col, Container, OverlayTrigger, Row, Image } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Col, Container, Row, Image, Tooltip } from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { forwardRef, useEffect } from "react";
+import { useEffect } from "react";
 import { MdVerifiedUser } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
-import { fetchUserProfile } from "../../redux/actions";
+import { fetchUserProfile, getUserFeedback } from "../../redux/actions";
 import parseISO from "date-fns/parseISO";
 import { findCountryCode } from "../../data/tools";
 
@@ -14,10 +15,15 @@ const UserProfile = () => {
   const username = params.username;
 
   const fetchedProfile = useSelector((state) => state.user?.selectedProfile);
+  const feedback = useSelector((state) => state.user?.selectedProfileFeedback);
 
   useEffect(() => {
     dispatch(fetchUserProfile(username));
   }, []);
+
+  if (fetchedProfile !== undefined) {
+    dispatch(getUserFeedback(fetchedProfile?._id));
+  }
 
   const countryCode = findCountryCode(fetchedProfile?.country) || "";
 
@@ -33,13 +39,27 @@ const UserProfile = () => {
         boxShadow: "1px 3px 5px lightgrey",
       }}
     >
-      <h1 className="m-3">
-        {fetchedProfile?.username}{" "}
-        <MdVerifiedUser
-          style={{ display: fetchedProfile?.active === false ? "none" : "" }}
-          color="#00a3ff"
-        />
-      </h1>
+      <OverlayTrigger
+        overlay={
+          <Tooltip>
+            {fetchedProfile?.active === false
+              ? "Unverified Account"
+              : "User is verified"}
+          </Tooltip>
+        }
+      >
+        <>
+          <h1 className="m-3">
+            {fetchedProfile?.username}{" "}
+            <MdVerifiedUser
+              style={{
+                display: fetchedProfile?.active === false ? "none" : "",
+              }}
+              color="#00a3ff"
+            />
+          </h1>
+        </>
+      </OverlayTrigger>
       <h6 className="mx-3">
         Member since {parseISO(fetchedProfile?.createdAt).getFullYear()}
       </h6>
@@ -61,17 +81,22 @@ const UserProfile = () => {
           className="text-center"
           style={{ borderLeft: "1px solid lightgrey" }}
         >
-          <Row style={{justifyContent: 'center'}}>
+          <Row style={{ justifyContent: "center" }}>
             <img
               src={`https://flagcdn.com/${countryCode[0]}.svg`}
-              style={{ width: '4rem'}}
+              style={{ width: "4rem" }}
               alt={fetchUserProfile?.country}
-            />  
+            />
             <h6>{fetchedProfile?.country}</h6>
           </Row>
         </Col>
       </Row>
       <hr />
+      <Row>
+        <Col className="mx-3" style={{ height: "100%" }}>
+          <Link>Submit Seller Feedback</Link>
+        </Col>
+      </Row>
     </Container>
   );
 };
