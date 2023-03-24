@@ -19,14 +19,15 @@ const Home = () => {
   return (
     <Container
       fluid
-      className="m-0 p-0"
+      className="m-0 pt-0 px-0 pb-4"
       style={{ width: "100%", height: "100%" }}
     >
-      {currentUser?.active === (false || undefined) && <VerificationWarning />}
+      {currentUser?.active === (false || undefined) && <VerificationWarning userStatus={currentUser?.active} />}
       <TopHero />
       <Trends />
       <LatestSec />
       <NewsSec />
+      
     </Container>
   );
 };

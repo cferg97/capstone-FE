@@ -5,7 +5,6 @@ import Tooltip from "react-bootstrap/Tooltip";
 import Popover from "react-bootstrap/Popover";
 
 const SearchDisplay = ({ info }) => {
-  
   let style;
   const rarity = info.rarity;
   const rarityToDisplay =
@@ -35,12 +34,12 @@ const SearchDisplay = ({ info }) => {
   return (
     <>
       <Row
-        className="m-0 text-center search-res-display"
-        style={{ height: "2rem" }}
+        className="m-0 p-0 text-center search-res-display"
+        style={{ height: "2rem", width: '100%' }}
       >
-        <Col md={{ span: 4 }}>
+        <Col md={{ span: 4 }} style={{ height: "100%" }}>
           <Row style={{ height: "100%", maxHeight: "100%" }}>
-            <Col>
+            <Col className="p-0" style={{height: '100%', lineHeight: '2rem'}}>
               {" "}
               <OverlayTrigger
                 placement="bottom"
@@ -49,7 +48,7 @@ const SearchDisplay = ({ info }) => {
                     <img
                       style={{ height: "15rem" }}
                       alt=""
-                      src={info?.image_uris.normal || ""}
+                      src={info?.image_uris?.normal || info?.card_faces[0].image_uris.normal || ""}
                     />
                   </Popover>
                 }
@@ -63,6 +62,7 @@ const SearchDisplay = ({ info }) => {
             </Col>
             <Col
               style={{
+                lineHeight: '2rem',
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",

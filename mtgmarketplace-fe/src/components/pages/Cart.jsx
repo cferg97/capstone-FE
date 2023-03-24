@@ -21,7 +21,7 @@ const Cart = () => {
 
   return (
     <>
-      <Container className="mt-2">
+      <Container className="mt-2" style={{height: '88.5vh'}}>
         <h1>Shopping Cart</h1>
         <hr />
         {cartItems.length === 0 ? (

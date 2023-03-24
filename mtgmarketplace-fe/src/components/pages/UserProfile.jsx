@@ -30,73 +30,74 @@ const UserProfile = () => {
   console.log(countryCode[0]);
 
   return (
-    <Container
-      className="mt-4"
-      style={{
-        border: "1px solid lightgrey",
-        borderRadius: "10px",
-        height: "40rem",
-        boxShadow: "1px 3px 5px lightgrey",
-      }}
-    >
-      <OverlayTrigger
-        overlay={
-          <Tooltip>
-            {fetchedProfile?.active === false
-              ? "Unverified Account"
-              : "User is verified"}
-          </Tooltip>
-        }
+    <Container style={{height: '86.6vh'}}>
+      <Container
+        className="mt-4"
+        style={{
+          border: "1px solid lightgrey",
+          borderRadius: "10px",
+          height: "40rem",
+        }}
       >
-        <>
-          <h1 className="m-3">
-            {fetchedProfile?.username}{" "}
-            <MdVerifiedUser
-              style={{
-                display: fetchedProfile?.active === false ? "none" : "",
-              }}
-              color="#00a3ff"
-            />
-          </h1>
-        </>
-      </OverlayTrigger>
-      <h6 className="mx-3">
-        Member since {parseISO(fetchedProfile?.createdAt).getFullYear()}
-      </h6>
-      <Row>
-        <Col
-          className="text-center"
-          style={{
-            borderRight: "1px solid lightgrey",
-            marginTop: "auto",
-            marginBottom: 0,
-          }}
+        <OverlayTrigger
+          overlay={
+            <Tooltip>
+              {fetchedProfile?.active === false
+                ? "Unverified Account"
+                : "User is verified"}
+            </Tooltip>
+          }
         >
-          <h5>
-            <FiUser size="2rem" className="mx-4" />
-            {fetchedProfile?.firstName}
-          </h5>
-        </Col>
-        <Col
-          className="text-center"
-          style={{ borderLeft: "1px solid lightgrey" }}
-        >
-          <Row style={{ justifyContent: "center" }}>
-            <img
-              src={`https://flagcdn.com/${countryCode[0]}.svg`}
-              style={{ width: "4rem" }}
-              alt={fetchUserProfile?.country}
-            />
-            <h6>{fetchedProfile?.country}</h6>
-          </Row>
-        </Col>
-      </Row>
-      <hr />
-      <Row>
-        <Col className="mx-3" style={{ height: "100%" }}>
-          <Link>Submit Seller Feedback</Link>
-        </Col>
-      </Row>
+          <>
+            <h1 className="m-3">
+              {fetchedProfile?.username}{" "}
+              <MdVerifiedUser
+                style={{
+                  display: fetchedProfile?.active === false ? "none" : "",
+                }}
+                color="#00a3ff"
+              />
+            </h1>
+          </>
+        </OverlayTrigger>
+        <h6 className="mx-3">
+          Member since {parseISO(fetchedProfile?.createdAt).getFullYear()}
+        </h6>
+        <Row>
+          <Col
+            className="text-center"
+            style={{
+              borderRight: "1px solid lightgrey",
+              marginTop: "auto",
+              marginBottom: 0,
+            }}
+          >
+            <h5>
+              <FiUser size="2rem" className="mx-4" />
+              {fetchedProfile?.firstName}
+            </h5>
+          </Col>
+          <Col
+            className="text-center"
+            style={{ borderLeft: "1px solid lightgrey" }}
+          >
+            <Row style={{ justifyContent: "center" }}>
+              <img
+                src={`https://flagcdn.com/${countryCode[0]}.svg`}
+                style={{ width: "4rem" }}
+                alt={fetchUserProfile?.country}
+              />
+              <h6>{fetchedProfile?.country}</h6>
+            </Row>
+          </Col>
+        </Row>
+        <hr />
+        <Row>
+          <Col className="mx-3" style={{ height: "100%" }}>
+            <Link>Submit Seller Feedback</Link>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 };

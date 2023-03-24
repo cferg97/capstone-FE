@@ -4,12 +4,15 @@ import { BiNews } from "react-icons/bi";
 const NewsSec = () => {
   return (
     <>
-      <Container className="mt-4 mb-4 pb-4" style={{ height: "fit-content" }}>
+      <Container
+        className="mt-4 mb-4 pb-4"
+        style={{ height: "fit-content", backgroundColor: "#f5f2f2" }}
+      >
         <h2 className="mt-2 mb-2">
           <BiNews /> News
         </h2>
         <hr className="mb-4 p-0" />
-        <Container style={{width: '80%'}}>
+        <Container style={{ width: "80%" }}>
           <Row>
             <Col>
               <h5 className="mx-2" style={{ textDecoration: "underline" }}>

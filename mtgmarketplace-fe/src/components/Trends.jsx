@@ -33,6 +33,7 @@ const Trends = () => {
       <Container
         className="mb-4 pb-4 pt-2"
         style={{
+          marginTop: '1.5rem',
           width: "100%",
           height: "fit-content",
           backgroundColor: "#f5f2f2",
@@ -60,7 +61,7 @@ const Trends = () => {
             </Row>
             <Row className="mt-3">
               <Col>
-                {bestSellers?.slice(4, 10).map((card, idx) => (
+                {bestSellers?.slice(3, 10).map((card, idx) => (
                   <TrendsList key={idx} info={card} num={idx} />
                 ))}
               </Col>
@@ -83,7 +84,7 @@ const Trends = () => {
             </Row>
             <Row className="mt-3">
               <Col>
-                {bargains?.slice(4, 10).map((card, idx) => (
+                {bargains?.slice(3, 10).map((card, idx) => (
                   <TrendsList key={idx} info={card} num={idx} />
                 ))}
               </Col>

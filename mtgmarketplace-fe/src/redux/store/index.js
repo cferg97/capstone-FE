@@ -4,6 +4,7 @@ import searchReducer from "../reducers/search";
 import setReducer from "../reducers/sets";
 import frontPageReducer from "../reducers/frontPage";
 import userCartReducer from "../reducers/cart";
+import linksReducer from "../reducers/links";
 
 const mainReducer = combineReducers({
   user: userReducer,
@@ -11,6 +12,7 @@ const mainReducer = combineReducers({
   sets: setReducer,
   frontPage: frontPageReducer,
   userCart: userCartReducer,
+  links: linksReducer
 });
 
 export const store = configureStore({

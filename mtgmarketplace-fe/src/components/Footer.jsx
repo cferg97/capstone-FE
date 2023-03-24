@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import {Container, Row } from "react-bootstrap";
 
 const MyFooter = () => {
   return (
@@ -8,14 +8,10 @@ const MyFooter = () => {
       style={{
         backgroundColor: "#EDEDED",
         height: "2rem",
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
       }}
     >
-      <Row className="text-center">
-        <p className="text-muted">
+      <Row className="text-center" style={{height: '100%', lineHeight: '2rem'}}>
+        <p className="text-muted m-0 p-0">
           © MTG Marketplace {new Date().getFullYear().toString()}
         </p>
       </Row>

@@ -108,6 +108,14 @@ a{
   }
 }
 
+.latest-set-1:hover .latest-set-2:hover .latest-set-3:hover {
+  cursor: pointer;
+}
+
+.latest-set-1-overlay:hover, .latest-set-2-overlay:hover, .latest-set-3-overlay:hover{
+  cursor: pointer;
+}
+
 .latest-set-1:hover > .latest-set-1-overlay > .set-description-text {
   top: 60%;
   animation: fadeIn 0.8s forwards;

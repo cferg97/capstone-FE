@@ -4,6 +4,7 @@ import {
   SET_CURRENT_CARD,
   CURRENT_CARD_LISTINGS,
   GET_CURRENT_PROFILE_FEEDBACK,
+  SET_SEARCH_QUERY,
 } from "../actions";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   searchResults: [],
   selectedProduct: [],
   selectedProductListings: [],
+  searchQuery: "",
   loading: false,
   error: false,
 };
@@ -49,6 +51,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedProfileFeedback: action.payload,
+      };
+    }
+    case SET_SEARCH_QUERY: {
+      return {
+        ...state,
+        searchQuery: action.payload,
       };
     }
     default:

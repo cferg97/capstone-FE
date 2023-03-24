@@ -40,7 +40,7 @@ const CardInfoPage = () => {
 
   return (
     <>
-      <Container>
+      <Container style={{height: '88.5vh'}}>
         <Row className="my-2">
           <Col>
             <h2>{currentCard?.name}</h2>

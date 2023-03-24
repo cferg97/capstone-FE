@@ -20,6 +20,7 @@ import {
   fetchUserCartAction,
   getCurrentUser,
   searchByName,
+  SET_SEARCH_QUERY,
 } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
@@ -31,6 +32,8 @@ const Navigation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const gblSearchQuery = useSelector((state) => state.user?.searchQuery)
 
   const [displayLogin, setDisplayLogin] = useState(false);
 
@@ -56,6 +59,10 @@ const Navigation = () => {
 
   const onSearch = (e) => {
     e.preventDefault();
+    dispatch({
+      type: SET_SEARCH_QUERY,
+      payload: searchQuery,
+    });
     dispatch(searchByName(searchQuery));
     if (searchQuery !== "") {
       navigate("/products/search");
@@ -167,8 +174,10 @@ const Navigation = () => {
               </Button>
 
               <Col className="d-flex mx-auto flex-column align-items-center">
-                <Badge style={{ position: "absolute", zIndex: "4", top: 5, }}>
-                  <p style={{fontSize: '1rem'}} className="p-0 m-0">{cart?.length}</p>
+                <Badge style={{ position: "absolute", zIndex: "4", top: 5 }}>
+                  <p style={{ fontSize: "1rem" }} className="p-0 m-0">
+                    {cart?.length}
+                  </p>
                 </Badge>
                 <Link to="/cart">
                   <img

@@ -4,7 +4,11 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { advancedSearchAction, retrieveSetData } from "../../redux/actions";
+import {
+  advancedSearchAction,
+  retrieveSetData,
+  SET_SEARCH_QUERY,
+} from "../../redux/actions";
 import SearchDisplay from "../SearchDisplay";
 import { searchByName } from "../../redux/actions";
 
@@ -16,12 +20,19 @@ const SearchResults = () => {
   }, []);
 
   const setNames = useSelector((state) => state.sets?.setNames);
+  const prevLink = useSelector((state) => state.links?.prev);
+  const nextLink = useSelector((state) => state.links?.next);
+  const totalProducts = useSelector((state) => state.links?.totalProducts);
+  const totalPages = useSelector((state) => state.links?.totalPages);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [rarity, setRarity] = useState("Select Card Rarity");
+
+  const gblSearchQuery = useSelector((state) => state.search?.searchQuery);
+
+  const [rarity, setRarity] = useState("All");
   const [setName, setSetName] = useState("All");
 
-  const base_url = `http://localhost:3001/search?name=/^.*${searchQuery}.*/i`;
+  const base_url = `http://localhost:3001/search?limit=20&name=/^.*${searchQuery}.*/i`;
   let queryUrl;
 
   const params = {
@@ -31,21 +42,47 @@ const SearchResults = () => {
 
   const onSearch = (e) => {
     e.preventDefault();
+    dispatch({
+      type: SET_SEARCH_QUERY,
+      payload: searchQuery,
+    });
     if (searchQuery !== "") {
       dispatch(searchByName(searchQuery));
+      setRarity("Select Card Rarity");
+      setSetName("All");
     }
   };
 
   const searchResults = useSelector((state) => state.search?.searchResults);
 
   const createParamString = () => {
-    if (rarity !== "Select Card Rarity" && setName !== "All") {
+    if (rarity !== "All" && setName !== "All") {
       queryUrl = base_url + params.setName + params.rarity;
       return queryUrl.toString();
     }
-    if (rarity !== "Select Card Rarity") {
+    if (rarity !== "All") {
       queryUrl = base_url + params.rarity;
       return queryUrl.toString();
+    }
+    if (rarity === "All") {
+      queryUrl = base_url;
+      return queryUrl.toString();
+    }
+    if (setName === "All") {
+      queryUrl = base_url;
+      return queryUrl.toString();
+    }
+    if (setName === "All" && rarity === "All") {
+      queryUrl = base_url;
+      return queryUrl.toString();
+    }
+    if(setName === 'All' && rarity !== 'All'){
+      queryUrl = base_url + params.rarity
+      return queryUrl.toString()
+    }
+    if(rarity === 'All' && setName !== 'All'){
+      queryUrl = base_url + params.setName
+      return queryUrl.toString()
     }
     if (setName !== "All") {
       queryUrl = base_url + params.setName;
@@ -58,6 +95,7 @@ const SearchResults = () => {
   return (
     <>
       <Container
+        className="mb-4 pb-4"
         style={{
           display: "flex",
           flexDirection: "column",
@@ -113,7 +151,7 @@ const SearchResults = () => {
                   defaultValue={rarity}
                   onChange={(e) => setRarity(e.target.value)}
                 >
-                  <option disabled>Select Card Rarity</option>
+                  <option value="All">All</option>
                   <option value="common">Common</option>
                   <option value="uncommon">Uncommon</option>
                   <option value="rare">Rare</option>
@@ -128,7 +166,7 @@ const SearchResults = () => {
                   defaultValue={setName}
                   onChange={(e) => setSetName(e.target.value)}
                 >
-                  <option disabled>All</option>
+                  <option value ="All">All</option>
                   {setNames.map((name, idx) => (
                     <option key={idx}>{name}</option>
                   ))}
@@ -149,7 +187,7 @@ const SearchResults = () => {
             </Row>
           </Row>
         </Container>
-        <Container className="mt-3">
+        <Container className="mt-3 ">
           <Row
             className="text-center text-white"
             style={{ backgroundColor: "#00a3ff" }}
@@ -182,6 +220,25 @@ const SearchResults = () => {
               )}
           </Container>
         </Container>
+        <Row style={{ width: "100%", justifyContent: "space-evenly" }}>
+          <Button
+            disabled={prevLink ? false : true}
+            onClick={() => dispatch(advancedSearchAction(prevLink))}
+            style={{ width: "fit-content" }}
+          >
+            Prev
+          </Button>
+          <Button
+            disabled={nextLink ? false : true}
+            onClick={() => dispatch(advancedSearchAction(nextLink))}
+            style={{ width: "fit-content" }}
+          >
+            Next
+          </Button>
+        </Row>
+        <Row className="text-center" style={{ width: "100%" }}>
+          <span>Search returned {totalProducts} {totalProducts === 1 ? "result" : "results"}</span>
+        </Row>
       </Container>
     </>
   );

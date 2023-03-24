@@ -4,7 +4,7 @@ import { TiStarburst } from "react-icons/ti";
 const LatestSec = () => {
   return (
     <>
-      <Container className="mt-4 mb-3" style={{ height: "fit-content" }}>
+      <Container className="mt-4 mb-3" style={{ height: "37rem", border: '1px solid #f5f2f2' }}>
         <h2 className="mt-2 mb-2">
           <TiStarburst /> Latest
         </h2>

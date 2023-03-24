@@ -2,7 +2,7 @@ export const SET_LOGGED_IN = "SET_LOGGED_IN";
 export const SET_SEARCH_QUERY = "SET_SEARCH_QUERY";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_CURRENT_PROFILE = "SET_CURRENT_PROFILE";
-export const GET_CURRENT_PROFILE_FEEDBACK = "GET_CURRENT_PROFILE_FEEDBACK"
+export const GET_CURRENT_PROFILE_FEEDBACK = "GET_CURRENT_PROFILE_FEEDBACK";
 export const SET_CURRENT_CARD = "SET_CURRENT_CARD";
 export const CURRENT_CARD_LISTINGS = "CURRENT_CARD_LISTINGS";
 export const SET_SETS = "SET_SETS";
@@ -10,6 +10,10 @@ export const SET_TRENDS = "SET_TRENDS";
 export const SET_BARGAINS = "SET_BARGAINS";
 export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 export const SET_USER_CART = "SET_USER_CART";
+export const SET_LINKS_PREV = "SET_LINKS_PREV";
+export const SET_LINKS_NEXT = "SET_LINKS_NEXT";
+export const TOTAL_SEARCH_RESULTS = "TOTAL_SEARCH_RESULTS";
+export const PAGE_NUMBERS = "PAGE_NUMBERS";
 
 export const retrieveSetData = () => {
   return async (dispatch) => {
@@ -159,13 +163,29 @@ export const searchByName = (searchQuery) => {
   return async (dispatch) => {
     try {
       let response = await fetch(
-        `http://localhost:3001/search?name=/^.*${searchQuery}.*/i`
+        `http://localhost:3001/search?limit=20&name=/^.*${searchQuery}.*/i`
       );
       if (response.ok) {
         let fetchedData = await response.json();
         dispatch({
           type: SET_SEARCH_RESULTS,
           payload: fetchedData.products,
+        });
+        dispatch({
+          type: TOTAL_SEARCH_RESULTS,
+          payload: fetchedData.total,
+        });
+        dispatch({
+          type: PAGE_NUMBERS,
+          payload: fetchedData.totalPages,
+        });
+        dispatch({
+          type: SET_LINKS_NEXT,
+          payload: fetchedData.links.next,
+        });
+        dispatch({
+          type: SET_LINKS_PREV,
+          payload: fetchedData.links.prev,
         });
       } else {
         console.log("Couldn't fetch search results");
@@ -185,6 +205,22 @@ export const advancedSearchAction = (url) => {
         dispatch({
           type: SET_SEARCH_RESULTS,
           payload: fetchedData.products,
+        });
+        dispatch({
+          type: TOTAL_SEARCH_RESULTS,
+          payload: fetchedData.total,
+        });
+        dispatch({
+          type: PAGE_NUMBERS,
+          payload: fetchedData.totalPages,
+        });
+        dispatch({
+          type: SET_LINKS_NEXT,
+          payload: fetchedData.links.next,
+        });
+        dispatch({
+          type: SET_LINKS_PREV,
+          payload: fetchedData.links.prev,
         });
       } else {
         console.log("Couldn't fetch search results");
@@ -302,41 +338,40 @@ export const addToCartAction = (id) => {
       const token = accessToken.split('"').join("");
 
       let response = await fetch(`http://localhost:3001/carts/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      if(response.ok){
-        dispatch(fetchUserCartAction())
+      if (response.ok) {
+        dispatch(fetchUserCartAction());
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 };
 
 export const getUserFeedback = (id) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     try {
       const accessToken = localStorage.getItem("userAccessToken");
       const token = accessToken.split('"').join("");
 
       let response = await fetch(`http://localhost:3001/reviews/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      if(response.ok){
-        let fetchedData = await response.json()
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
         dispatch({
           type: GET_CURRENT_PROFILE_FEEDBACK,
-          payload: fetchedData
-        })
-
+          payload: fetchedData,
+        });
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-}
+  };
+};
