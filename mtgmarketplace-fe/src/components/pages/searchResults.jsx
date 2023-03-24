@@ -27,8 +27,6 @@ const SearchResults = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const gblSearchQuery = useSelector((state) => state.search?.searchQuery);
-
   const [rarity, setRarity] = useState("All");
   const [setName, setSetName] = useState("All");
 
@@ -42,14 +40,9 @@ const SearchResults = () => {
 
   const onSearch = (e) => {
     e.preventDefault();
-    dispatch({
-      type: SET_SEARCH_QUERY,
-      payload: searchQuery,
-    });
     if (searchQuery !== "") {
       dispatch(searchByName(searchQuery));
-      setRarity("Select Card Rarity");
-      setSetName("All");
+      console.log(queryUrl);
     }
   };
 
@@ -76,13 +69,13 @@ const SearchResults = () => {
       queryUrl = base_url;
       return queryUrl.toString();
     }
-    if(setName === 'All' && rarity !== 'All'){
-      queryUrl = base_url + params.rarity
-      return queryUrl.toString()
+    if (setName === "All" && rarity !== "All") {
+      queryUrl = base_url + params.rarity;
+      return queryUrl.toString();
     }
-    if(rarity === 'All' && setName !== 'All'){
-      queryUrl = base_url + params.setName
-      return queryUrl.toString()
+    if (rarity === "All" && setName !== "All") {
+      queryUrl = base_url + params.setName;
+      return queryUrl.toString();
     }
     if (setName !== "All") {
       queryUrl = base_url + params.setName;
@@ -166,9 +159,11 @@ const SearchResults = () => {
                   defaultValue={setName}
                   onChange={(e) => setSetName(e.target.value)}
                 >
-                  <option value ="All">All</option>
+                  <option value="All">All</option>
                   {setNames.map((name, idx) => (
-                    <option key={idx}>{name}</option>
+                    <option value={name} key={idx}>
+                      {name}
+                    </option>
                   ))}
                 </Form.Select>
               </Form.Group>
@@ -237,7 +232,10 @@ const SearchResults = () => {
           </Button>
         </Row>
         <Row className="text-center" style={{ width: "100%" }}>
-          <span>Search returned {totalProducts} {totalProducts === 1 ? "result" : "results"}</span>
+          <span>
+            Search returned {totalProducts}{" "}
+            {totalProducts === 1 ? "result" : "results"}
+          </span>
         </Row>
       </Container>
     </>

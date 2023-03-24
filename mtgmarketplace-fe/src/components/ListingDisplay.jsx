@@ -14,9 +14,9 @@ const ListingDisplay = ({ info, seller }) => {
     <>
       <Container
         className="listing-con"
-        style={{ width: "100%", height: "2rem", border: "1px solid red" }}
+        style={{ width: "100%", height: "2rem", }}
       >
-        <Row className="text-center">
+        <Row className="text-center" style={{height: '2rem', lineHeight: '1.8rem'}}>
           <Col>
             {seller.username} |{" "}
             <OverlayTrigger
@@ -39,7 +39,7 @@ const ListingDisplay = ({ info, seller }) => {
             onClick={() => {
               dispatch(addToCartAction(info?.cardmarketId))
             }}
-              style={{ position: "absolute", right: 0, width: "2rem", height: '2rem' }}
+              style={{ position: "absolute", right: 10, top: '-1px', width: "2rem", height: '2rem' }}
             >
               <BsCartPlus />
             </Button>

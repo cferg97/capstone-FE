@@ -1,4 +1,4 @@
-import { Container, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import { Col, Container, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 
 const ItemDisplayCart = ({ sellerName, info, items }) => {
   return (
@@ -13,14 +13,22 @@ const ItemDisplayCart = ({ sellerName, info, items }) => {
             <b>Seller: {sellerName}</b>
           </h5>
 
-          <h6>Items:
-            {items?.map((i) => (
-                <h6>{i}</h6>
-            ))}
-          </h6>
-        </Row>
-
-        <Row></Row>
+          <h6>Items:</h6>
+        </Row>{" "}
+        {items &&
+          items?.map((i) => (
+            <Row className="p-0 m-0" style={{ width: "100%" }}>
+              <Col md={4}>
+                <h6>{i.name}</h6>
+              </Col>
+              <Col md={{offset: 2, span: 1}}>
+                {i.condition}
+              </Col>
+              <Col md={{offset: 4, span: 1}}>
+                <h6>x{i.quantity}</h6>
+              </Col>
+            </Row>
+          ))}
       </Container>
     </>
   );

@@ -42,7 +42,7 @@ const Cart = () => {
             }}
           >
             {sellersArr?.map((seller) => (
-              <ItemDisplayCart sellerName={seller} />
+              <ItemDisplayCart sellerName={seller} items={cartItems || []} />
             ))}
           </Col>
           <Col

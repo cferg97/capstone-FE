@@ -1,4 +1,4 @@
-import { Col, Container, Row, Tabs, Tab } from "react-bootstrap";
+import { Col, Container, Row, Tabs, Tab, Form, Button } from "react-bootstrap";
 import { HiInformationCircle } from "react-icons/hi";
 import { MdSell } from "react-icons/md";
 import { FaComments } from "react-icons/fa";
@@ -40,7 +40,7 @@ const CardInfoPage = () => {
 
   return (
     <>
-      <Container style={{height: '88.5vh'}}>
+      <Container style={{ height: "88.5vh" }}>
         <Row className="my-2">
           <Col>
             <h2>{currentCard?.name}</h2>
@@ -73,7 +73,33 @@ const CardInfoPage = () => {
                 </Container>
               </Tab>
               <Tab eventKey="sell" title={<MdSell />}>
-                <Container></Container>
+                <Container>
+                  <Form className="mt-2" style={{ width: "60%" }}>
+                    <Form.Group className="mb-2">
+                      <Form.Label>Quantity</Form.Label>
+                      <Form.Control defaultValue={1} type="number" />
+                    </Form.Group>
+                    <Form.Group className="mb-2">
+                      <Form.Label>Condition</Form.Label>
+                      <Form.Select>
+                        <option value="NM">Near Mint</option>
+                        <option value="EX">Excellent</option>
+                        <option value="GD">Good</option>
+                        <option value="LP">Lightly Played</option>
+                        <option value="HP">Heavily Played</option>
+                      </Form.Select>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Language</Form.Label>
+                      <Form.Select disabled>
+                        <option value="English" selected>English</option>
+                      </Form.Select>
+                    </Form.Group>
+                  </Form>
+                  <Button className="my-2" type="submit">
+                    List for Sale
+                  </Button>
+                </Container>
               </Tab>
               <Tab eventKey="comments" title={<FaComments />}></Tab>
             </Tabs>

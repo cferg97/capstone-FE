@@ -375,3 +375,29 @@ export const getUserFeedback = (id) => {
     }
   };
 };
+
+export const newListingAction = (id, forminfo) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch(`http://localhost:3001/sell/${id}`, {
+        method: "POST",
+        body: JSON.stringify(forminfo),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if(response.ok){
+        dispatch(getCurrentProductListings(id))
+      }
+      else{
+        console.log("Problem submitting listing")
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
+};
