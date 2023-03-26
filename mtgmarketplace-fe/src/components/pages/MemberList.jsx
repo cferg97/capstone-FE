@@ -1,10 +1,40 @@
 import { Container, Row, Form, Button, Col } from "react-bootstrap";
 import { FiUsers } from "react-icons/fi";
 import MemberListItem from "../MemberListItems";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { searchUserAction } from "../../redux/actions";
 
 const MemberList = () => {
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [country, setCountry] = useState("All");
+
+  const searchResults = useSelector((state) => state.search?.userSearchResults)
+
+  const base_url = `http://localhost:3001/users?username=${username}`;
+
+  const with_country = `&country=${country}`;
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    if (username !== "" && country === "All") {
+      dispatch(searchUserAction(base_url));
+    }
+    if (username !== "" && country !== "All") {
+      dispatch(searchUserAction(base_url + with_country));
+    }
+    if (username === "" && country !== "All") {
+      dispatch(
+        searchUserAction(`http://localhost:3001/users?country=${country}`)
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
-    <Container className="mt-2" style={{ width: "75vw", height: '80vh' }}>
+    <Container className="mt-2" style={{ width: "75vw", height: "80vh" }}>
       <Row
         style={{
           backgroundColor: "#EDEDED",
@@ -21,14 +51,20 @@ const MemberList = () => {
         <Form style={{ display: "flex" }}>
           <Form.Group className="my-3" style={{ width: "50%" }}>
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Search by username" />
+            <Form.Control
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              type="text"
+              placeholder="Search by username"
+            />
           </Form.Group>
           <Form.Group className="my-3 mx-2">
             <Form.Label>Country</Form.Label>
-            <Form.Select>
-              <option disabled selected>
-                All
-              </option>
+            <Form.Select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            >
+              <option selected>All</option>
               <option value="Afghanistan">Afghanistan</option>
               <option value="Albania">Albania</option>
               <option value="Algeria">Algeria</option>
@@ -317,22 +353,32 @@ const MemberList = () => {
             className="ms-auto"
             style={{ height: "38px", marginTop: "3rem" }}
             type="submit"
+            onClick={(e) => onSearch(e)}
           >
             Search
           </Button>
         </Form>
       </Row>
-      <Container>
-        <Row style={{backgroundColor: '#00a3ff'}} className="text-center py-2"> 
-          <Col><h6>Username</h6></Col>
-          <Col><h6>Total Sales</h6></Col>
-          <Col><h6>Member Since</h6></Col>
+      <Container className="p-0 mt-2">
+        <Row
+          style={{ backgroundColor: "#00a3ff" }}
+          className="text-center text-white py-2"
+        >
+          <Col>
+            <h6>Username</h6>
+          </Col>
+          <Col>
+            <h6>Total Sales</h6>
+          </Col>
+          <Col>
+            <h6>Member Since</h6>
+          </Col>
         </Row>
-        <MemberListItem />
-        <MemberListItem />
-        <MemberListItem />
-        <MemberListItem />
-        <MemberListItem />
+        <Row>
+          {searchResults && searchResults.map((user) => (
+            <MemberListItem user={user}/>
+          ))}
+        </Row>
       </Container>
     </Container>
   );

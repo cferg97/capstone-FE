@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   getCurrentProductListings,
+  newListingAction,
   setCurrentProductAction,
 } from "../../redux/actions";
 import ListingDisplay from "../ListingDisplay";
@@ -37,6 +38,23 @@ const CardInfoPage = () => {
   useEffect(() => {
     dispatch(getCurrentProductListings(currentCard?.cardmarket_id));
   }, [currentCard]);
+
+  const [quantity, setQuantity] = useState(1);
+  const [condition, setCondition] = useState("Near Mint");
+  const [language, setLanguage] = useState("English");
+  const [price, setPrice] = useState(0.0);
+
+  const cardToSend = {
+    quantity: quantity,
+    condition: condition,
+    language: language,
+    price: price,
+  };
+
+  const onList = (e) => {
+    e.preventDefault();
+    dispatch(newListingAction(id, cardToSend));
+  };
 
   return (
     <>
@@ -74,14 +92,28 @@ const CardInfoPage = () => {
               </Tab>
               <Tab eventKey="sell" title={<MdSell />}>
                 <Container>
-                  <Form className="mt-2" style={{ width: "60%" }}>
+                  <Form
+                    className="mt-2"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "60%",
+                    }}
+                  >
                     <Form.Group className="mb-2">
                       <Form.Label>Quantity</Form.Label>
-                      <Form.Control defaultValue={1} type="number" />
+                      <Form.Control
+                        defaultValue={1}
+                        type="number"
+                        onChange={(e) => setQuantity(e.target.valueAsNumber)}
+                      />
                     </Form.Group>
                     <Form.Group className="mb-2">
                       <Form.Label>Condition</Form.Label>
-                      <Form.Select>
+                      <Form.Select
+                        value={condition}
+                        onChange={(e) => setCondition(e.target.value)}
+                      >
                         <option value="NM">Near Mint</option>
                         <option value="EX">Excellent</option>
                         <option value="GD">Good</option>
@@ -92,13 +124,28 @@ const CardInfoPage = () => {
                     <Form.Group>
                       <Form.Label>Language</Form.Label>
                       <Form.Select disabled>
-                        <option value="English" selected>English</option>
+                        <option value="English" selected>
+                          English
+                        </option>
                       </Form.Select>
                     </Form.Group>
+                    <Form.Group className="mt-2">
+                      <Form.Label>Price</Form.Label>
+                      <Form.Control
+                        type="number"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.valueAsNumber)}
+                      />
+                    </Form.Group>
+                    <Button
+                      style={{ width: "fit-content" }}
+                      onClick={(e) => onList(e)}
+                      className="ms-auto mt-2"
+                      type="submit"
+                    >
+                      List for Sale
+                    </Button>
                   </Form>
-                  <Button className="my-2" type="submit">
-                    List for Sale
-                  </Button>
                 </Container>
               </Tab>
               <Tab eventKey="comments" title={<FaComments />}></Tab>

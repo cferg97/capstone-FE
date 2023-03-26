@@ -30,39 +30,41 @@ const UserProfile = () => {
   console.log(countryCode[0]);
 
   return (
-    <Container style={{height: '86.6vh'}}>
+    <Container style={{ height: "86.6vh" }}>
       <Container
         className="mt-4"
         style={{
           border: "1px solid lightgrey",
           borderRadius: "10px",
           height: "40rem",
+          position: "relative",
         }}
       >
-        <OverlayTrigger
-          overlay={
-            <Tooltip>
-              {fetchedProfile?.active === false
-                ? "Unverified Account"
-                : "User is verified"}
-            </Tooltip>
-          }
-        >
-          <>
-            <h1 className="m-3">
-              {fetchedProfile?.username}{" "}
-              <MdVerifiedUser
-                style={{
-                  display: fetchedProfile?.active === false ? "none" : "",
-                }}
-                color="#00a3ff"
-              />
-            </h1>
-          </>
-        </OverlayTrigger>
+        <h1 className="m-3">
+          {fetchedProfile?.username}{" "}
+          <MdVerifiedUser
+            style={{
+              display: fetchedProfile?.active === false ? "none" : "",
+            }}
+            color="#00a3ff"
+          />
+        </h1>
+        <Row style={{ width: "100%" }}>
+          <Link
+            style={{ width: "fit-content", marginLeft: "auto", marginRight: 0 }}
+          >
+            Submit Seller Feedback
+          </Link>
+        </Row>
+
         <h6 className="mx-3">
           Member since {parseISO(fetchedProfile?.createdAt).getFullYear()}
         </h6>
+        <Row className="mx-3 text-muted" style={{ fontSize: "0.75rem" }}>
+          Total Sales: {fetchedProfile?.userActivity?.sales.total}
+          <br />
+          Purchases made: {fetchedProfile?.userActivity?.purchases.total}
+        </Row>
         <Row>
           <Col
             className="text-center"
@@ -92,11 +94,6 @@ const UserProfile = () => {
           </Col>
         </Row>
         <hr />
-        <Row>
-          <Col className="mx-3" style={{ height: "100%" }}>
-            <Link>Submit Seller Feedback</Link>
-          </Col>
-        </Row>
       </Container>
     </Container>
   );

@@ -14,6 +14,7 @@ export const SET_LINKS_PREV = "SET_LINKS_PREV";
 export const SET_LINKS_NEXT = "SET_LINKS_NEXT";
 export const TOTAL_SEARCH_RESULTS = "TOTAL_SEARCH_RESULTS";
 export const PAGE_NUMBERS = "PAGE_NUMBERS";
+export const USER_SEARCH_RESULTS = "USER_SEARCH_RESULTS";
 
 export const retrieveSetData = () => {
   return async (dispatch) => {
@@ -390,14 +391,39 @@ export const newListingAction = (id, forminfo) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      if(response.ok){
-        dispatch(getCurrentProductListings(id))
-      }
-      else{
-        console.log("Problem submitting listing")
+      if (response.ok) {
+        dispatch(getCurrentProductListings(id));
+      } else {
+        console.log("Problem submitting listing");
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
+    }
+  };
+};
+
+export const searchUserAction = (url) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: USER_SEARCH_RESULTS,
+          payload: fetchedData.users,
+        });
+      } else {
+        console.log("Could not fetch user information");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 };

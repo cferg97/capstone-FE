@@ -1,9 +1,14 @@
-import { SET_SEARCH_QUERY, SET_SEARCH_RESULTS } from "../actions";
+import {
+  SET_SEARCH_QUERY,
+  SET_SEARCH_RESULTS,
+  USER_SEARCH_RESULTS,
+} from "../actions";
 
 const initialState = {
   searchQuery: "",
   searchResults: [],
   filters: [],
+  userSearchResults: [],
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -18,6 +23,12 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         searchResults: action.payload,
+      };
+    }
+    case USER_SEARCH_RESULTS: {
+      return {
+        ...state,
+        userSearchResults: action.payload,
       };
     }
     default:

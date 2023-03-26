@@ -5,20 +5,32 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { BsCartPlus } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { addToCartAction } from "../redux/actions";
+import { Link } from "react-router-dom";
 
 const ListingDisplay = ({ info, seller }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const countryCode = findCountryCode(seller?.country) || "";
 
   return (
     <>
       <Container
         className="listing-con"
-        style={{ width: "100%", height: "2rem", }}
+        style={{
+          width: "100%",
+          height: "2rem",
+          borderTopRightRadius: "5px",
+          borderBottomRightRadius: "5px",
+        }}
       >
-        <Row className="text-center" style={{height: '2rem', lineHeight: '1.8rem'}}>
+        <Row
+          className="text-center"
+          style={{ height: "2rem", lineHeight: "1.8rem" }}
+        >
           <Col>
-            {seller.username} |{" "}
+            <Link to={"/users/profile/" + seller.username}>
+              {seller.username}
+            </Link>{" "}
+            |{" "}
             <OverlayTrigger
               overlay={<Tooltip>Item location: {seller?.country}</Tooltip>}
             >
@@ -35,11 +47,16 @@ const ListingDisplay = ({ info, seller }) => {
           <Col style={{ position: "relative" }}>
             {info.quantity} | {info.price}
             <Button
-            className="p-0 text-white"
-            onClick={() => {
-              dispatch(addToCartAction(info?.cardmarketId))
-            }}
-              style={{ position: "absolute", right: 10, top: '-1px', width: "2rem", height: '2rem' }}
+              className="p-0 text-white"
+              onClick={() => {
+                dispatch(addToCartAction(info?.cardmarketId));
+              }}
+              style={{
+                position: "absolute",
+                right: 10,
+                width: "1.8rem",
+                height: "1.9rem",
+              }}
             >
               <BsCartPlus />
             </Button>
