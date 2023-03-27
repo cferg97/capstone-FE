@@ -15,6 +15,7 @@ export const SET_LINKS_NEXT = "SET_LINKS_NEXT";
 export const TOTAL_SEARCH_RESULTS = "TOTAL_SEARCH_RESULTS";
 export const PAGE_NUMBERS = "PAGE_NUMBERS";
 export const USER_SEARCH_RESULTS = "USER_SEARCH_RESULTS";
+export const CARD_COMMENTS = "CARD_COMMENTS";
 
 export const retrieveSetData = () => {
   return async (dispatch) => {
@@ -421,6 +422,56 @@ export const searchUserAction = (url) => {
         });
       } else {
         console.log("Could not fetch user information");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchCommentsAction = (id) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+      let response = await fetch(`http://localhost:3001/comments/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let fetchedData = await response.json();
+        dispatch({
+          type: CARD_COMMENTS,
+          payload: fetchedData,
+        });
+      } else {
+        console.log("Couldn't fetch comments");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const newCommentAction = (id, comment) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch(`http://localhost:3001/comments/${id}`, {
+        method: "POST",
+        body: JSON.stringify(comment),
+        "Content-Type": "application/json",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(fetchCommentsAction(id));
+      } else {
+        console.log("problem posting comment");
       }
     } catch (err) {
       console.log(err);

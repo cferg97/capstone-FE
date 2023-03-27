@@ -5,6 +5,7 @@ import {
   CURRENT_CARD_LISTINGS,
   GET_CURRENT_PROFILE_FEEDBACK,
   SET_SEARCH_QUERY,
+  CARD_COMMENTS,
 } from "../actions";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   selectedProfileFeedback: [],
   searchResults: [],
   selectedProduct: [],
+  selectedProductComments: [],
   selectedProductListings: [],
   searchQuery: "",
   loading: false,
@@ -57,6 +59,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         searchQuery: action.payload,
+      };
+    }
+    case CARD_COMMENTS: {
+      return {
+        ...state,
+        selectedProductComments: action.payload,
       };
     }
     default:

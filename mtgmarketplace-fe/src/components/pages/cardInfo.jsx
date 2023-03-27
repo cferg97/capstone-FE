@@ -1,4 +1,13 @@
-import { Col, Container, Row, Tabs, Tab, Form, Button } from "react-bootstrap";
+import {
+  Col,
+  Container,
+  Row,
+  Tabs,
+  Tab,
+  Form,
+  Button,
+  ListGroupItem,
+} from "react-bootstrap";
 import { HiInformationCircle } from "react-icons/hi";
 import { MdSell } from "react-icons/md";
 import { FaComments } from "react-icons/fa";
@@ -12,7 +21,9 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
+  fetchCommentsAction,
   getCurrentProductListings,
+  newCommentAction,
   newListingAction,
   setCurrentProductAction,
 } from "../../redux/actions";
@@ -39,6 +50,14 @@ const CardInfoPage = () => {
     dispatch(getCurrentProductListings(currentCard?.cardmarket_id));
   }, [currentCard]);
 
+  useEffect(() => {
+    dispatch(fetchCommentsAction(id));
+  }, []);
+
+  const cardComments = useSelector(
+    (state) => state.user?.selectedProductComments
+  );
+
   const [quantity, setQuantity] = useState(1);
   const [condition, setCondition] = useState("Near Mint");
   const [language, setLanguage] = useState("English");
@@ -54,6 +73,17 @@ const CardInfoPage = () => {
   const onList = (e) => {
     e.preventDefault();
     dispatch(newListingAction(id, cardToSend));
+  };
+
+  const [commentText, setComment] = useState("");
+
+  const commentToSend = {
+    "comment": commentText,
+  };
+
+  const onSubmitComment = (e) => {
+    e.preventDefault();
+    dispatch(newCommentAction(id, commentToSend));
   };
 
   return (
@@ -148,7 +178,49 @@ const CardInfoPage = () => {
                   </Form>
                 </Container>
               </Tab>
-              <Tab eventKey="comments" title={<FaComments />}></Tab>
+              <Tab eventKey="comments" title={<FaComments />}>
+                <Container className="mt-3">
+                  <Row style={{ width: "100%" }}>
+                    <h4>Comments</h4>
+
+                    {cardComments.length === 0 ? (
+                      <b>This card has no comments. Add one?</b>
+                    ) : (
+                      ""
+                    )}
+                    {cardComments.length >= 1
+                      ? cardComments.map((comment) => (
+                          <ListGroupItem style={{ marginLeft: "0.7rem" }}>
+                            {comment.posterId.username} | {comment.comment}
+                          </ListGroupItem>
+                        ))
+                      : ""}
+                  </Row>
+
+                  <Row style={{ alignItems: "center" }}>
+                    <Form
+                      className="mt-4"
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <Form.Group style={{ width: "50%" }}>
+                        <Form.Control
+                          value={commentText}
+                          onChange={(e) => setComment(e.target.value)}
+                          type="text"
+                          placeholder="Add a comment..."
+                        ></Form.Control>
+                      </Form.Group>
+                      <Button
+                        onClick={(e) => onSubmitComment(e)}
+                        type="submit"
+                        style={{ height: "fit-content", width: "fit-content" }}
+                      >
+                        Post
+                      </Button>
+                    </Form>
+                  </Row>
+                </Container>
+              </Tab>
             </Tabs>
           </Col>
           <hr className="my-2" />
