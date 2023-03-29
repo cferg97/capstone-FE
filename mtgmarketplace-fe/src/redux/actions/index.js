@@ -478,3 +478,28 @@ export const newCommentAction = (id, form) => {
     }
   };
 };
+
+export const newFeedbackAction = (username, form) => {
+  return async (dispatch) => {
+    try {
+      const accessToken = localStorage.getItem("userAccessToken");
+      const token = accessToken.split('"').join("");
+
+      let response = await fetch(`http://localhost:3001/reviews/${username}`, {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch(getUserFeedback(username));
+      } else {
+        console.log("Couldnt post");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

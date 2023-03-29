@@ -28,16 +28,18 @@ const UserProfile = () => {
   const params = useParams();
   const username = params.username;
 
+  const id = useSelector((state) => state.user?.currentUser._id)
   const fetchedProfile = useSelector((state) => state.user?.selectedProfile);
   const feedback = useSelector((state) => state.user?.selectedProfileFeedback);
 
   useEffect(() => {
     dispatch(fetchUserProfile(username));
+    dispatch(getUserFeedback(username))
   }, []);
 
-  if (fetchedProfile !== undefined) {
-    dispatch(getUserFeedback(username));
-  }
+  // if (fetchedProfile !== undefined) {
+  //   dispatch(getUserFeedback(username));
+  // }
 
   const countryCode = findCountryCode(fetchedProfile?.country) || "";
 
@@ -133,7 +135,7 @@ const UserProfile = () => {
           </Container>
         </Container>
       </Container>
-      <FeedbackModel show={show} onHide={handleClose}/>
+      <FeedbackModel show={show} onHide={handleClose} seller={username} poster={id}/>
     </>
   );
 };
