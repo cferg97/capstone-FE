@@ -256,7 +256,7 @@ export const getBargainsAction = () => {
   return async (dispatch) => {
     try {
       let response = await fetch(
-        "http://localhost:3001/sell?sort=price&limit=10"
+        "http://localhost:3001/sell?sort=price-name&limit=10"
       );
       if (response.ok) {
         let fetchedData = await response.json();
@@ -354,13 +354,13 @@ export const addToCartAction = (id) => {
   };
 };
 
-export const getUserFeedback = (id) => {
+export const getUserFeedback = (username) => {
   return async (dispatch) => {
     try {
       const accessToken = localStorage.getItem("userAccessToken");
       const token = accessToken.split('"').join("");
 
-      let response = await fetch(`http://localhost:3001/reviews/${id}`, {
+      let response = await fetch(`http://localhost:3001/reviews/${username}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -454,7 +454,7 @@ export const fetchCommentsAction = (id) => {
   };
 };
 
-export const newCommentAction = (id, comment) => {
+export const newCommentAction = (id, form) => {
   return async (dispatch) => {
     try {
       const accessToken = localStorage.getItem("userAccessToken");
@@ -462,9 +462,9 @@ export const newCommentAction = (id, comment) => {
 
       let response = await fetch(`http://localhost:3001/comments/${id}`, {
         method: "POST",
-        body: JSON.stringify(comment),
-        "Content-Type": "application/json",
+        body: JSON.stringify(form),
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });

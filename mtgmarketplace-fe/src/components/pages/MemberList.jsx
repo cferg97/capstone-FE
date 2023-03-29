@@ -34,7 +34,7 @@ const MemberList = () => {
   };
 
   return (
-    <Container className="mt-2" style={{ width: "75vw", height: "80vh" }}>
+    <Container className="mt-2" style={{ width: "75vw", height: "88.7vh" }}>
       <Row
         style={{
           backgroundColor: "#EDEDED",

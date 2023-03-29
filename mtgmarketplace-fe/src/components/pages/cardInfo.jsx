@@ -19,7 +19,7 @@ import "yet-another-react-lightbox/styles.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   fetchCommentsAction,
   getCurrentProductListings,
@@ -78,12 +78,13 @@ const CardInfoPage = () => {
   const [commentText, setComment] = useState("");
 
   const commentToSend = {
-    "comment": commentText,
+    text: commentText,
   };
 
   const onSubmitComment = (e) => {
     e.preventDefault();
     dispatch(newCommentAction(id, commentToSend));
+    setComment("");
   };
 
   return (
@@ -191,7 +192,14 @@ const CardInfoPage = () => {
                     {cardComments.length >= 1
                       ? cardComments.map((comment) => (
                           <ListGroupItem style={{ marginLeft: "0.7rem" }}>
-                            {comment.posterId.username} | {comment.comment}
+                            <Link
+                              to={
+                                "/users/profile/" + comment?.posterId.username
+                              }
+                            >
+                              {comment?.posterId.username}{" "}
+                            </Link>
+                            | {comment.text}
                           </ListGroupItem>
                         ))
                       : ""}
