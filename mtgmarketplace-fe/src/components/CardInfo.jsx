@@ -58,7 +58,7 @@ const CardInfo = ({ card }) => {
         <b>Collector Number: {card?.collector_number}</b>
       </Row>
       <Row className="mb-3">
-        <b>Printed In: </b>
+        <b>Printed In: {card.set_name}</b>
       </Row>
       {/* <Row className="mb-3"><b>From: £{card?.price.eur || card?.price.eur_foil}</b></Row> */}
 
